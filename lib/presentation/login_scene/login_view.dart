@@ -1,4 +1,5 @@
 import 'package:book_report/presentation/login_scene/widgets/logo_view.dart';
+import 'package:book_report/presentation/login_scene/widgets/oauth_login_view.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatelessWidget {
@@ -6,12 +7,13 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           LogoView(),
-          // OAuthLoginView(),
+          SizedBox(height: 30),
+          OAuthLoginView(),
         ],
       ),
     );
