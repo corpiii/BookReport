@@ -1,3 +1,4 @@
+import 'package:book_report/presentation/home_scene/widgets/bottom_app_bar/bottom_tab_bar.dart';
 import 'package:book_report/presentation/home_scene/widgets/latest_book_history/latest_book_history.dart';
 import 'package:book_report/presentation/home_scene/widgets/random_advice.dart';
 import 'package:book_report/presentation/home_scene/widgets/session_title.dart';
@@ -21,10 +22,12 @@ class HomeView extends StatelessWidget {
               SessionTitle('최근 읽은 책'),
               SizedBox(height: 10,),
               LatestBookHistory(),
+              SizedBox(height: 20,),
             ],
           ),
         ),
       ),
+      bottomNavigationBar: BottomTabBar()
     );
   }
 }
