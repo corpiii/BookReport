@@ -13,17 +13,15 @@ class BookReportHistory extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: sevenDays,
-          crossAxisSpacing: 2.0,
+          crossAxisSpacing: 3.0,
+          mainAxisSpacing: 3.0,
         ),
         itemCount: 365,
         itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.all(1.0),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: Colors.greenAccent,
-              ),
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4.0),
+              color: Colors.greenAccent,
             ),
           );
         },
