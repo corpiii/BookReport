@@ -15,7 +15,7 @@ class BookReportItem extends StatelessWidget {
       child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
-            color: Colors.deepPurple,
+            color: Colors.blue,
           )),
     );
   }
