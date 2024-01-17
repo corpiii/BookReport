@@ -1,5 +1,5 @@
-import 'package:book_report/presentation/home_scene/widgets/bottom_app_bar/bottom_tab_bar.dart';
 import 'package:book_report/presentation/home_scene/widgets/latest_book_history/latest_book_history.dart';
+import 'package:book_report/presentation/home_scene/widgets/notification_setting.dart';
 import 'package:book_report/presentation/home_scene/widgets/random_advice.dart';
 import 'package:book_report/presentation/home_scene/widgets/session_title.dart';
 import 'package:flutter/material.dart';
@@ -9,25 +9,20 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xFFF7FAF4),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(12.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RandomAdvice(),
-              SizedBox(height: 20,),
-              SessionTitle('최근 읽은 책'),
-              SizedBox(height: 10,),
-              LatestBookHistory(),
-              SizedBox(height: 20,),
-            ],
-          ),
-        ),
+    return const Padding(
+      padding: EdgeInsets.all(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          RandomAdvice(),
+          SizedBox(height: 20,),
+          SessionTitle('최근 읽은 책'),
+          SizedBox(height: 10,),
+          LatestBookHistory(),
+          SizedBox(height: 50,),
+          NotificationSetting(),
+        ],
       ),
-      bottomNavigationBar: BottomTabBar()
     );
   }
 }
