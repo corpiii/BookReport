@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class BookReportItem extends StatelessWidget {
+class BookListItem extends StatelessWidget {
   final void Function() _onTap; // need model argument
 
-  const BookReportItem({
+  const BookListItem({
     super.key,
     required void Function() onTap,
   }) : _onTap = onTap;

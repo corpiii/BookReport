@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class BookReportHistory extends StatelessWidget {
-  const BookReportHistory({super.key});
+class LatestBookHistory extends StatelessWidget {
+  const LatestBookHistory({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,10 @@
-import 'package:book_report/presentation/books_scene/widgets/book_report_item.dart';
+import 'package:book_report/presentation/books_scene/widgets/book_list_item.dart';
+import 'package:book_report/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class BookReportList extends StatelessWidget {
-  const BookReportList({super.key});
+class BookList extends StatelessWidget {
+  const BookList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,8 @@ class BookReportList extends StatelessWidget {
         ),
         itemCount: 5,
         itemBuilder: (BuildContext context, int index) {
-          return BookReportItem(onTap: () { // need model
-            context.push('detail');
+          return BookListItem(onTap: () { // need model
+            context.push(bookDetailViewLocation);
           },);
       }),
     );

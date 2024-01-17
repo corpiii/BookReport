@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class BookReportAddButton extends StatelessWidget {
+class BookAddButton extends StatelessWidget {
   final void Function() _onTap;
 
-  const BookReportAddButton({
+  const BookAddButton({
     super.key,
     required void Function() onTap,
   }) : _onTap = onTap;

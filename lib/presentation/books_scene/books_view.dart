@@ -1,6 +1,6 @@
-import 'package:book_report/presentation/books_scene/widgets/book_report_history.dart';
-import 'package:book_report/presentation/books_scene/widgets/book_report_list.dart';
-import 'package:book_report/presentation/books_scene/widgets/boot_report_add_button.dart';
+import 'package:book_report/presentation/books_scene/widgets/latest_book_history.dart';
+import 'package:book_report/presentation/books_scene/widgets/book_list.dart';
+import 'package:book_report/presentation/books_scene/widgets/boot_add_button.dart';
 import 'package:book_report/presentation/books_scene/widgets/custom_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -19,10 +19,10 @@ class _BooksViewState extends State<BooksView> {
       children: [
         const Column(
           children: [
-            BookReportHistory(),
+            LatestBookHistory(),
             SizedBox(height: 20),
             Expanded(
-              child: BookReportList(),
+              child: BookList(),
             ),
           ],
         ),
@@ -30,7 +30,7 @@ class _BooksViewState extends State<BooksView> {
         Positioned(
           right: 10,
           bottom: 10,
-          child: BookReportAddButton(onTap: () {
+          child: BookAddButton(onTap: () {
             // showDialog
             showDialog(context: context, builder: (context) {
               return CustomAlertDialog();
