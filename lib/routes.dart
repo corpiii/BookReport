@@ -1,4 +1,4 @@
-import 'package:book_report/presentation/book_detail_scene/book_detail_view.dart';
+import 'package:book_report/presentation/book_report_list_scene/book_report_list_view.dart';
 import 'package:book_report/presentation/login_scene/login_view.dart';
 import 'package:book_report/presentation/main_scene/main_scene.dart';
 import 'package:go_router/go_router.dart';
@@ -22,7 +22,7 @@ final GoRouter routes = GoRouter(
       path: bookDetailViewLocation,
       builder: (context, state) {
         // state.extra BookModel
-        return BookDetailView();
+        return BookReportListView();
       },
     ),
   ]
