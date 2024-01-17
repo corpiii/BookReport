@@ -1,3 +1,4 @@
+import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:book_report/presentation/login_scene/widgets/logo_view.dart';
 import 'package:book_report/presentation/login_scene/widgets/oauth_login_view.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Color(0xFFF7FAF4),
+      backgroundColor: ColorConstant.backgroundColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

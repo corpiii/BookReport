@@ -1,3 +1,4 @@
+import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:book_report/presentation/home_scene/home_view.dart';
 import 'package:book_report/presentation/home_scene/widgets/bottom_tab_item.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class MainView extends StatelessWidget {
     const spacerRatio = 1;
 
     return Scaffold(
-      backgroundColor: Color(0xFFF7FAF4),
+      backgroundColor: ColorConstant.backgroundColor,
       body: SafeArea(
         child: _pageList[_selectedIndex]
       ),
