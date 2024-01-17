@@ -1,4 +1,6 @@
+import 'package:book_report/presentation/books_scene/widgets/book_report_item.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class BookReportList extends StatelessWidget {
   const BookReportList({super.key});
@@ -15,14 +17,9 @@ class BookReportList extends StatelessWidget {
         ),
         itemCount: 5,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.0),
-              color: Colors.blue,
-            ),
-            width: 100,
-            height: 100,
-          );
+          return BookReportItem(onTap: () { // need model
+            context.push('detail');
+          },);
       }),
     );
   }

@@ -14,7 +14,7 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   final List<Widget> _pageList = [
     const HomeView(),
-    const BooksView(),
+    BooksView(),
   ];
 
   int _selectedIndex = 0;

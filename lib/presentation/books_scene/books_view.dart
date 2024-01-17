@@ -3,16 +3,33 @@ import 'package:book_report/presentation/books_scene/widgets/book_report_list.da
 import 'package:flutter/material.dart';
 
 class BooksView extends StatelessWidget {
-  const BooksView({super.key});
+  BooksView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        BookReportHistory(),
-        SizedBox(height: 20),
-        Expanded(
-          child: BookReportList(),
+        const Column(
+          children: [
+            BookReportHistory(),
+            SizedBox(height: 20),
+            Expanded(
+              child: BookReportList(),
+            ),
+          ],
+        ),
+
+        Positioned(
+          right: 10,
+          bottom: 10,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(90),
+              color: Colors.deepPurple,
+            ),
+            width: 50,
+            height: 50,
+          )
         ),
       ],
     );
