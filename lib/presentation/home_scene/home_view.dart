@@ -9,20 +9,17 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(12.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          RandomAdvice(),
-          SizedBox(height: 20,),
-          SessionTitle('최근 읽은 책'),
-          SizedBox(height: 10,),
-          LatestBookHistory(),
-          SizedBox(height: 50,),
-          NotificationSetting(),
-        ],
-      ),
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RandomAdvice(),
+        SizedBox(height: 20,),
+        SessionTitle('최근 읽은 책'),
+        SizedBox(height: 10,),
+        LatestBookHistory(),
+        SizedBox(height: 50,),
+        NotificationSetting(),
+      ],
     );
   }
 }
