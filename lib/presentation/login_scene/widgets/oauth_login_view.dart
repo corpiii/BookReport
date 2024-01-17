@@ -1,4 +1,6 @@
+import 'package:book_report/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class OAuthLoginView extends StatefulWidget {
   const OAuthLoginView({super.key});
@@ -45,6 +47,9 @@ class _OAuthLoginViewState extends State<OAuthLoginView> {
         setState(() {
           _isTapped = false;
         });
+      },
+      onTap: () {
+        context.go(homeViewLocation);
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(90),

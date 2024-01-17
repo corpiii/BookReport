@@ -6,6 +6,7 @@ class LogoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+
     return Center(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
