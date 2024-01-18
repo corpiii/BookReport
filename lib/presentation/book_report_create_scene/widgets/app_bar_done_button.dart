@@ -12,7 +12,7 @@ class AppBarDoneButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: _onTap,
-      child: Text(
+      child: const Text(
         'Done',
         style: TextStyle(
           color: Colors.green,
