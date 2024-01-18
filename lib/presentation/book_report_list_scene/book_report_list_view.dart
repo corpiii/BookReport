@@ -1,7 +1,9 @@
 import 'package:book_report/presentation/book_report_list_scene/widgets/report_add_button.dart';
 import 'package:book_report/presentation/book_report_list_scene/widgets/report_list.dart';
 import 'package:book_report/presentation/common/color_constant.dart';
+import 'package:book_report/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class BookReportListView extends StatefulWidget {
   const BookReportListView({super.key});
@@ -27,7 +29,7 @@ class _BookReportListViewState extends State<BookReportListView> {
                 ReportList(),
                 Positioned(
                   child: ReportAddButton(onTap: () {
-                    print('report add tapped');
+                    context.push(reportCreatePath);
                   }),
                   right: 20,
                   bottom: 20,
