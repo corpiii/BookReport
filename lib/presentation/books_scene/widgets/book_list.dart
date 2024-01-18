@@ -19,7 +19,7 @@ class BookList extends StatelessWidget {
         itemCount: 5,
         itemBuilder: (BuildContext context, int index) {
           return BookListItem(onTap: () { // need model
-            context.push(bookDetailViewLocation);
+            context.push(bookReportListPath);
           });
       }),
     );

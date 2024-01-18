@@ -26,9 +26,11 @@ class _BookReportListViewState extends State<BookReportListView> {
               children: [
                 ReportList(),
                 Positioned(
+                  child: ReportAddButton(onTap: () {
+                    print('report add tapped');
+                  }),
                   right: 20,
                   bottom: 20,
-                  child: ReportAddButton(onTap: () {}),
                 ),
               ],
             )),

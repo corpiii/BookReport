@@ -26,17 +26,9 @@ class _BooksViewState extends State<BooksView> {
             ),
           ],
         ),
-
-        Positioned(
-          right: 10,
-          bottom: 10,
-          child: BookAddButton(onTap: () {
-            // showDialog
-            showDialog(context: context, builder: (context) {
-              return CustomAlertDialog();
-            });
-          })
-        ),
+        Positioned(right: 10, bottom: 10, child: BookAddButton(onTap: () {
+          showDialog(context: context, builder: (context) => CustomAlertDialog());
+        })),
       ],
     );
   }
