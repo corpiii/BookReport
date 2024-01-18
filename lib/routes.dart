@@ -1,3 +1,4 @@
+import 'package:book_report/presentation/book_report_create_scene/book_report_create_view.dart';
 import 'package:book_report/presentation/book_report_detail_scene/book_report_detail_view.dart';
 import 'package:book_report/presentation/book_report_list_scene/book_report_list_view.dart';
 import 'package:book_report/presentation/login_scene/login_view.dart';
@@ -8,10 +9,9 @@ const loginPath = '/';
 const mainPath = '/main';
 const bookReportListPath = '$mainPath/bookReportList';
 const reportDetailPath = '$bookReportListPath/reportDetail';
+const reportCreatePath = '$bookReportListPath/reportCreate';
 
-final GoRouter routes = GoRouter(
-    initialLocation: '/main/bookReportList',
-    routes: [
+final GoRouter routes = GoRouter(initialLocation: '/main/bookReportList', routes: [
   GoRoute(
     path: '/',
     builder: (context, state) => const LoginView(),
@@ -36,6 +36,14 @@ final GoRouter routes = GoRouter(
 
                   return BookReportDetailView();
                 },
+              ),
+              GoRoute(
+                path: 'reportCreate',
+                builder: (context, state) {
+                  // state.extra
+
+                  return BookReportCreateView();
+                }
               )
             ]),
       ]),
