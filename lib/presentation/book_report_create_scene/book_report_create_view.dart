@@ -1,6 +1,8 @@
+import 'package:book_report/presentation/book_report_create_scene/widgets/app_bar_done_button.dart';
 import 'package:book_report/presentation/book_report_create_scene/widgets/rounded_text_field.dart';
 import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class BookReportCreateView extends StatefulWidget {
   const BookReportCreateView({super.key});
@@ -25,6 +27,15 @@ class _BookReportCreateViewState extends State<BookReportCreateView> {
     return Scaffold(
       backgroundColor: ColorConstant.backgroundColor,
       appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: AppBarDoneButton(onTap: () {
+              // create model
+              context.pop();
+            }),
+          )
+        ],
         backgroundColor: ColorConstant.backgroundColor,
       ),
       body: SafeArea(
