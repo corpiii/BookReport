@@ -49,7 +49,7 @@ class _OAuthLoginViewState extends State<OAuthLoginView> {
         });
       },
       onTap: () {
-        context.go(mainViewLocation);
+        context.go(mainPath);
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(90),

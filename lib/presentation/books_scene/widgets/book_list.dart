@@ -13,14 +13,14 @@ class BookList extends StatelessWidget {
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 20,
           crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
         ),
         itemCount: 5,
         itemBuilder: (BuildContext context, int index) {
           return BookListItem(onTap: () { // need model
-            context.push(bookDetailViewLocation);
-          },);
+            context.push(bookReportListPath);
+          });
       }),
     );
   }
