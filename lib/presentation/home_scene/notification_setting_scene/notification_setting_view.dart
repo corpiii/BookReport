@@ -40,6 +40,7 @@ class NotificationSettingView extends StatelessWidget {
               TimePickerView(),
             ],
           ),
-        ));
+        )
+    );
   }
 }
