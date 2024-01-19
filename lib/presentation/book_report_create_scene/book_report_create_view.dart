@@ -1,5 +1,5 @@
-import 'package:book_report/presentation/book_report_create_scene/widgets/app_bar_done_button.dart';
-import 'package:book_report/presentation/book_report_create_scene/widgets/rounded_text_field.dart';
+import 'package:book_report/presentation/common/app_bar_button.dart';
+import 'package:book_report/presentation/common/rounded_text_field.dart';
 import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,6 +22,7 @@ class _BookReportCreateViewState extends State<BookReportCreateView> {
     _titleTextEditingController.dispose();
     _bodyTextEditingController.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,10 +31,14 @@ class _BookReportCreateViewState extends State<BookReportCreateView> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: AppBarDoneButton(onTap: () {
-              // create model
-              context.pop();
-            }),
+            child: AppBarButton(
+              'Done',
+              color: Colors.green,
+              onTap: () {
+                // create model
+                context.pop();
+              },
+            ),
           )
         ],
         backgroundColor: ColorConstant.backgroundColor,
@@ -50,7 +55,7 @@ class _BookReportCreateViewState extends State<BookReportCreateView> {
                 borderRadius: 12,
                 maxLines: 1,
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20),
               RoundedTextField(
                 controller: _bodyTextEditingController,
                 hintText: 'body',
@@ -58,7 +63,9 @@ class _BookReportCreateViewState extends State<BookReportCreateView> {
                 maxLines: 15,
                 borderRadius: 12,
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.1,)
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
+              )
             ],
           ),
         ),

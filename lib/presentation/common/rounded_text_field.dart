@@ -16,30 +16,28 @@ class RoundedTextField extends StatelessWidget {
     int? maxLines,
   })  : _textEditingController = controller,
         _hintText = hintText,
-        _color = color ?? Colors.black,
+        _color = color,
         _borderRadius = borderRadius ?? 0,
         _maxLines = maxLines;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: TextField(
-        minLines: _maxLines,
-        maxLines: _maxLines,
-        cursorColor: _color,
-        decoration: InputDecoration(
-          hintText: _hintText,
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: _color),
-            borderRadius: BorderRadius.circular(_borderRadius),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: _color),
-            borderRadius: BorderRadius.circular(_borderRadius),
-          ),
+    return TextField(
+      minLines: _maxLines,
+      maxLines: _maxLines,
+      cursorColor: _color,
+      decoration: InputDecoration(
+        hintText: _hintText,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: _color),
+          borderRadius: BorderRadius.circular(_borderRadius),
         ),
-        controller: _textEditingController,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: _color),
+          borderRadius: BorderRadius.circular(_borderRadius),
+        ),
       ),
+      controller: _textEditingController,
     );
   }
 }

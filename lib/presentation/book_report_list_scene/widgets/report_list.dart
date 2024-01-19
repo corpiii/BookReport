@@ -18,9 +18,9 @@ class ReportList extends StatelessWidget {
             background: Container(color: Colors.red),
             direction: DismissDirection.endToStart,
             onDismissed: (direction) {},
-            child: ReportListItem(onTap: () {
+            child: ReportListItem(onTap: () async {
               // extra: model[index]
-              context.push(reportDetailPath);
+              await context.push(reportDetailPath);
             })
         );
       },

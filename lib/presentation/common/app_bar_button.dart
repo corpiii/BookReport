@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 
-class AppBarDoneButton extends StatelessWidget {
+class AppBarButton extends StatelessWidget {
   final void Function() _onTap;
+  final String _text;
+  final Color _color;
 
-  const AppBarDoneButton({
+  const AppBarButton(
+    String text, {
     super.key,
+    Color color = Colors.blue,
     required void Function() onTap,
-  }) : _onTap = onTap;
+  })  : _text = text,
+        _color = color,
+        _onTap = onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: _onTap,
       child: Text(
-        'Done',
+        _text,
         style: TextStyle(
-          color: Colors.green,
+          color: _color,
           fontSize: 16,
-          fontWeight: FontWeight.bold
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
