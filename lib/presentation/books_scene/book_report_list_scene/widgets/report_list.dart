@@ -1,4 +1,4 @@
-import 'package:book_report/presentation/book_report_list_scene/widgets/report_list_item.dart';
+import 'package:book_report/presentation/books_scene/book_report_list_scene/widgets/report_list_item.dart';
 import 'package:book_report/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

@@ -30,7 +30,7 @@ class _BookReportEditViewState extends State<BookReportEditView> {
         backgroundColor: ColorConstant.backgroundColor,
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(12.0),
             child: AppBarButton(
               'Done',
               color: Colors.green,

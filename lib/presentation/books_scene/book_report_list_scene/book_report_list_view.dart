@@ -1,5 +1,5 @@
-import 'package:book_report/presentation/book_report_list_scene/widgets/report_add_button.dart';
-import 'package:book_report/presentation/book_report_list_scene/widgets/report_list.dart';
+import 'package:book_report/presentation/books_scene/book_report_list_scene/widgets/report_add_button.dart';
+import 'package:book_report/presentation/books_scene/book_report_list_scene/widgets/report_list.dart';
 import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:book_report/routes.dart';
 import 'package:flutter/material.dart';

@@ -1,15 +1,17 @@
 import 'package:book_report/presentation/home_scene/widgets/latest_book_history/latest_book_history.dart';
-import 'package:book_report/presentation/home_scene/widgets/notification_setting.dart';
+import 'package:book_report/presentation/home_scene/widgets/notification_info.dart';
 import 'package:book_report/presentation/home_scene/widgets/random_advice.dart';
 import 'package:book_report/presentation/home_scene/widgets/session_title.dart';
+import 'package:book_report/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         RandomAdvice(),
@@ -18,7 +20,9 @@ class HomeView extends StatelessWidget {
         SizedBox(height: 10,),
         LatestBookHistory(),
         SizedBox(height: 50,),
-        NotificationSetting(),
+        NotificationInfo(onTap: () {
+          context.go(notificationSettingPath);
+        },),
       ],
     );
   }

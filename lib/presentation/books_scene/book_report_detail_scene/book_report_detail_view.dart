@@ -1,4 +1,4 @@
-import 'package:book_report/presentation/book_report_detail_scene/widgets/radius_box_text.dart';
+import 'package:book_report/presentation/books_scene/book_report_detail_scene/widgets/radius_box_text.dart';
 import 'package:book_report/presentation/common/app_bar_button.dart';
 import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:book_report/routes.dart';
@@ -16,7 +16,7 @@ class BookReportDetailView extends StatelessWidget {
         backgroundColor: ColorConstant.backgroundColor,
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(12.0),
             child: AppBarButton('Edit', onTap: () async {
               await context.push(reportEditPath);
             }),
