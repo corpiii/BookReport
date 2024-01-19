@@ -48,8 +48,6 @@ final GoRouter routes = GoRouter(
                   );
                 });
             }
-          // return NotificationSettingView();
-
         ),
         GoRoute(
             path: 'bookReportList',
