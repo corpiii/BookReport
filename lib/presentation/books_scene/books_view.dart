@@ -1,5 +1,5 @@
 import 'package:book_report/presentation/books_scene/widgets/latest_book_history.dart';
-import 'package:book_report/presentation/books_scene/widgets/book_list.dart';
+import 'package:book_report/presentation/books_scene/book_list_scene/book_list.dart';
 import 'package:book_report/presentation/books_scene/widgets/book_add_button.dart';
 import 'package:book_report/presentation/books_scene/widgets/custom_alert_dialog.dart';
 import 'package:flutter/material.dart';
