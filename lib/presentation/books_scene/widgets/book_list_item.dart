@@ -12,11 +12,31 @@ class BookListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: _onTap,
-      child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.0),
-            color: Colors.blue,
-          )),
+      // onLongPress: ,
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.0),
+              color: Colors.blue,
+            ),
+          ),
+
+          // isLongPress ? thisPositioned : null
+          Positioned(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(90),
+                color: Colors.red,
+              ),
+              width: 20,
+              height: 20,
+            ),
+            right: 3,
+            top: 3,
+          ),
+        ],
+      ),
     );
   }
 }
