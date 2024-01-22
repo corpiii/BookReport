@@ -2,6 +2,7 @@ import 'package:book_report/presentation/books_scene/books_view.dart';
 import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:book_report/presentation/home_scene/home_view.dart';
 import 'package:book_report/presentation/home_scene/widgets/bottom_tab_item.dart';
+import 'package:book_report/presentation/main_scene/drawer_scene/drawer_view.dart';
 import 'package:flutter/material.dart';
 
 class MainView extends StatefulWidget {
@@ -23,6 +24,10 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorConstant.backgroundColor,
+      appBar: AppBar(
+        backgroundColor: ColorConstant.backgroundColor,
+      ),
+      drawer: DrawerView(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
