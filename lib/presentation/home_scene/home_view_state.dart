@@ -6,6 +6,6 @@ part 'home_view_state.freezed.dart';
 @freezed
 class HomeViewState with _$HomeViewState {
   const factory HomeViewState({
-    required String randomAdvice,
+    @Default('') String randomAdvice,
   }) = _HomeViewState;
 }

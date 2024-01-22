@@ -8,9 +8,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
   HomeViewModel({
     required randomAdviceUseCase,
   })  : _randomAdviceUseCase = randomAdviceUseCase,
-        super(HomeViewState(
-          randomAdvice: '',
-        ));
+        super(HomeViewState());
 
   Future<void> fetchRandomAdvice() async {
     final advice = await _randomAdviceUseCase.execute();
