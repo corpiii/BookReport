@@ -1,4 +1,4 @@
-import 'package:book_report/di/view_model_provider/home_view_model_provider.dart';
+import 'package:book_report/di/view_model_provider.dart';
 import 'package:book_report/presentation/home_scene/widgets/latest_book_history/latest_book_history.dart';
 import 'package:book_report/presentation/home_scene/widgets/notification_info.dart';
 import 'package:book_report/presentation/home_scene/widgets/random_advice.dart';
