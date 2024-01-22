@@ -25,7 +25,9 @@ class NotificationSettingView extends StatelessWidget {
           actions: [
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: AppBarButton('Save', onTap: () {},),
+              child: AppBarButton('Save', onTap: () {
+                context.pop();
+              },),
             ),
           ],
         ),
