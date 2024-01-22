@@ -13,19 +13,23 @@ class RandomAdvice extends ConsumerWidget {
       onTap: () {
         ref.read(homeViewProvider.notifier).fetchRandomAdvice();
       },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.blue,
-        ),
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
-        height: 150,
-        child: Center(
-          child: Text(
-            state.randomAdvice,
+      child: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            // color: Colors.green[300],
+          ),
+          width: MediaQuery.of(context).size.width * 0.85,
+          height: 100,
+          child: Center(
+            child: Text(
+              state.randomAdvice,
+              style: TextStyle(
+                fontFamily: 'RubikScribble-Regular',
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
+            ),
           ),
         ),
       ),
