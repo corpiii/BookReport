@@ -10,6 +10,9 @@ class RandomAdviceUseCaseImpl implements RandomAdviceUseCase {
 
   @override
   Future<String> execute() async {
-    return await _randomAdviceRepository.fetchRandomAdvice();
+    final advice = await _randomAdviceRepository.fetchRandomAdvice();
+    final trimmedAdvice = advice.replaceAll('. ', '.\n');
+
+    return trimmedAdvice;
   }
 }
