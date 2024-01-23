@@ -5,4 +5,7 @@ import 'package:book_report/domain/model/result.dart';
 abstract interface class BookManagementRepository {
   Future<Result<List<BookHistoryDTO>>> fetchReportHistory();
   Future<Result<BookDTO>> createBook({required String title});
+  Future<Result<BookDTO>> deleteBook({required BookDTO model});
+  Future<Result<BookDTO>> fetchBook({required BookDTO model});
+  Future<Result<BookDTO>> editBook({required BookDTO model});
 }
