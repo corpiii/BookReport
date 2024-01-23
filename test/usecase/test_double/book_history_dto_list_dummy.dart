@@ -1,6 +1,6 @@
 import 'package:book_report/domain/dto/book_history_dto.dart';
 
-class BookHistoryDTOListDummy {
+abstract class BookHistoryDTOListDummy {
   static List<BookHistoryDTO> dummy = [
     BookHistoryDTO(dateTime: DateTime(2024, 1, 19).toIso8601String()),
     BookHistoryDTO(dateTime: DateTime(2024, 1, 20).toIso8601String()),

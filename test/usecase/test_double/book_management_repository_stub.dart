@@ -2,11 +2,10 @@ import 'package:book_report/domain/dto/book_dto.dart';
 import 'package:book_report/domain/dto/book_history_dto.dart';
 import 'package:book_report/domain/model/result.dart';
 import 'package:book_report/domain/repository/book_management_repository.dart';
-import 'package:book_report/domain/translator/book_translator.dart';
 import 'package:uuid/uuid.dart';
 
 import 'book_history_dto_list_dummy.dart';
-import 'book_list_dummy.dart';
+import 'book_dummy.dart';
 
 class BookManagementRepositoryStub implements BookManagementRepository {
   @override
