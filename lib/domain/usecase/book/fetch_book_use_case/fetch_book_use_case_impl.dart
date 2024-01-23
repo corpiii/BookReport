@@ -27,5 +27,4 @@ class FetchBookUseCaseImpl implements FetchBookUseCase {
         return Result.error(AppError.fetch.message);
     }
   }
-
 }
