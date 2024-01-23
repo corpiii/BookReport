@@ -18,7 +18,7 @@ const reportCreatePath = '$bookReportListPath/reportCreate';
 const reportEditPath = '$bookReportListPath/reportEdit';
 
 final GoRouter routes = GoRouter(
-  initialLocation: '/main',
+  initialLocation: '/',
   routes: [
     GoRoute(
       path: '/',

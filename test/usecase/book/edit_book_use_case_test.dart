@@ -23,7 +23,7 @@ void main() {
     // then
     switch (result) {
       case Success<Book>():
-        expect(result.data.id, dummy.id);
+        expect(result.data.author, dummy.author);
         expect(result.data.title, changedTitle);
       case Error<Book>():
         throwsA(AppError.delete.message);

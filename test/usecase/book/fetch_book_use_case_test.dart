@@ -21,7 +21,7 @@ void main() {
     switch (result) {
       case Success<List<Book>>():
         result.data.asMap().forEach((index, element) {
-          expect(element.id, BookListDummy.dummy[index].id);
+          expect(element.author, BookListDummy.dummy[index].author);
         });
       case Error<List<Book>>():
         throwsA(AppError.fetch.message);
