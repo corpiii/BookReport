@@ -1,4 +1,5 @@
 import 'package:book_report/domain/dto/book_history_dto.dart';
+import 'package:book_report/domain/model/app_error.dart';
 import 'package:book_report/domain/model/book_history.dart';
 import 'package:book_report/domain/model/result.dart';
 import 'package:book_report/domain/repository/book_management_repository.dart';
@@ -23,7 +24,7 @@ class FetchBookHistoryUseCaseImpl implements FetchBookHistoryUseCase {
 
         return Result.success(data);
       case Error<List<BookHistoryDTO>>():
-        return Result.error('failed to fetch');
+        return Result.error(AppError.fetch.message);
     }
   }
 }
