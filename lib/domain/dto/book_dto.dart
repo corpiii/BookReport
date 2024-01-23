@@ -1,8 +1,8 @@
-class Book {
+class BookDTO {
   String id;
   String title;
 
-  Book({
+  BookDTO({
     required this.id,
     required this.title,
   });

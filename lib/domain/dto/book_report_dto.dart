@@ -1,10 +1,10 @@
-class BookReport {
+class BookReportDTO {
   String id;
   String title;
   String content;
   DateTime dateTime;
 
-  BookReport({
+  BookReportDTO({
     required this.id,
     required this.title,
     required this.content,

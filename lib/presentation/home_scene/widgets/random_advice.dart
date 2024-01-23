@@ -1,4 +1,4 @@
-import 'package:book_report/di/view_model_provider/home_view_model_provider.dart';
+import 'package:book_report/di/view_model_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
