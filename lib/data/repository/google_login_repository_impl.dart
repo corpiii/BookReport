@@ -21,7 +21,7 @@ class GoogleLoginRepositoryImpl implements GoogleLoginRepository {
 
     _firebaseAuth = FirebaseAuth.instanceFor(app: app);
   }
-  
+
   @override
   Future<Result<UserDTO>> login() async {
     final GoogleSignIn googleSignIn = GoogleSignIn();

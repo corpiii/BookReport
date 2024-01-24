@@ -1,7 +1,11 @@
 import 'package:book_report/di/view_model_provider.dart';
 import 'package:book_report/domain/model/oauth_method.dart';
+import 'package:book_report/presentation/books_scene/widgets/custom_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../routes.dart';
 
 class OAuthLoginView extends ConsumerWidget {
   const OAuthLoginView({super.key});
@@ -25,7 +29,15 @@ class OAuthLoginView extends ConsumerWidget {
             _loginIcon(
               'assets/image/google_sign_icon.png',
               onTap: () {
-                viewModel.login(OAuthMethod.google);
+                viewModel.login(
+                  method: OAuthMethod.google,
+                  onComplete: (user) {
+                    context.go(mainPath, extra: user);
+                  },
+                  onError: (message) {
+
+                  },
+                );
               },
             ),
             const SizedBox(width: 30),

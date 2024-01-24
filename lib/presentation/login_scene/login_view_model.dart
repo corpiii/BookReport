@@ -13,16 +13,18 @@ class LoginViewModel extends StateNotifier<LoginViewState> {
   })  : _oAuthLoginUseCase = oAuthLoginUseCase,
         super(LoginViewState());
 
-  Future<void> login(OAuthMethod method) async {
-    if (_oAuthLoginUseCase == null) return;
-
-    final result = await _oAuthLoginUseCase!.execute(method);
+  Future<void> login({
+    required OAuthMethod method,
+    required void Function(User user) onComplete,
+    required void Function(String message) onError,
+  }) async {
+    final result = await _oAuthLoginUseCase.execute(method);
 
     switch (result) {
       case Success<User>():
-        break;
+        onComplete(result.data);
       case Error<User>():
-        print(result.e);
+        onError(result.e);
     }
   }
 }

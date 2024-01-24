@@ -1,3 +1,4 @@
+import 'package:book_report/domain/model/user.dart';
 import 'package:book_report/presentation/books_scene/book_report_create_scene/book_report_create_view.dart';
 import 'package:book_report/presentation/books_scene/book_report_detail_scene/book_report_detail_view.dart';
 import 'package:book_report/presentation/books_scene/book_report_edit_scene/book_report_edit_view.dart';
@@ -27,6 +28,8 @@ final GoRouter routes = GoRouter(
     GoRoute(
       path: '/main',
       builder: (context, state) {
+        final user = state.extra as User;
+
         return MainView();
       },
       routes: [
