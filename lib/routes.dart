@@ -5,7 +5,7 @@ import 'package:book_report/presentation/books_scene/book_report_edit_scene/book
 import 'package:book_report/presentation/books_scene/book_report_list_scene/book_report_list_view.dart';
 import 'package:book_report/presentation/home_scene/notification_setting_scene/notification_setting_view.dart';
 import 'package:book_report/presentation/login_scene/login_view.dart';
-import 'package:book_report/presentation/main_scene/main_scene.dart';
+import 'package:book_report/presentation/main_scene/main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

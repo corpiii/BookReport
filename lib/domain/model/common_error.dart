@@ -20,14 +20,17 @@ enum AppError {
 }
 
 enum OAuthError {
-  loginError;
+  login,
+  notSupported;
 
   String get message {
     String result = '';
 
     switch (OAuthError) {
-      case OAuthError.loginError:
+      case OAuthError.login:
         result = 'failed to google login';
+      case OAuthError.notSupported:
+        result = 'not supported method';
     }
 
     return result;

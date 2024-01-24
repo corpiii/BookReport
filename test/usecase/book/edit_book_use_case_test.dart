@@ -1,4 +1,4 @@
-import 'package:book_report/domain/model/app_error.dart';
+import 'package:book_report/domain/model/common_error.dart';
 import 'package:book_report/domain/model/book.dart';
 import 'package:book_report/domain/model/result.dart';
 import 'package:book_report/domain/usecase/book/edit_book_use_case/edit_book_use_case_impl.dart';
