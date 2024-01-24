@@ -1,19 +1,20 @@
-import 'package:book_report/routes.dart';
+import 'package:book_report/di/view_model_provider.dart';
+import 'package:book_report/domain/model/oauth_method.dart';
+import 'package:book_report/presentation/books_scene/widgets/custom_alert_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class OAuthLoginView extends StatefulWidget {
+import '../../../routes.dart';
+
+class OAuthLoginView extends ConsumerWidget {
   const OAuthLoginView({super.key});
 
   @override
-  State<OAuthLoginView> createState() => _OAuthLoginViewState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(loginViewModelProvider);
+    final viewModel = ref.read(loginViewModelProvider.notifier);
 
-class _OAuthLoginViewState extends State<OAuthLoginView> {
-  bool _isTapped = false;
-
-  @override
-  Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
@@ -25,38 +26,45 @@ class _OAuthLoginViewState extends State<OAuthLoginView> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _loginIcon('assets/image/logo.png'),
-            const SizedBox(width: 30,),
-            _loginIcon('assets/image/logo.png'),
-            const SizedBox(width: 30,),
-            _loginIcon('assets/image/logo.png'),
+            _loginIcon(
+              'assets/image/google_sign_icon.png',
+              onTap: () {
+                viewModel.login(
+                  method: OAuthMethod.google,
+                  onComplete: (user) {
+                    context.go(mainPath);
+                  },
+                  onError: (message) {
+
+                  },
+                );
+              },
+            ),
+            const SizedBox(width: 30),
+            _loginIcon(
+              'assets/image/apple_sign_icon.png',
+              onTap: () {},
+            ),
+            const SizedBox(width: 30),
+            _loginIcon(
+              'assets/image/logo.png',
+              onTap: () {},
+            ),
           ],
         )
       ],
     );
   }
 
-  Widget _loginIcon(String imageUrl) {
+  Widget _loginIcon(String imageUrl, {required void Function() onTap}) {
     return GestureDetector(
-      onTapDown: (details) {
-        setState(() {
-          _isTapped = true;
-        });
-      },
-      onTapUp: (details) {
-        setState(() {
-          _isTapped = false;
-        });
-      },
-      onTap: () {
-        context.go(mainPath);
-      },
+      onTap: onTap,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(90),
         child: Image.asset(
           imageUrl,
-          color: _isTapped ? const Color.fromARGB(200, 255, 255, 255) : null,
-          colorBlendMode: BlendMode.modulate,
+          // color: _isTapped ? const Color.fromARGB(200, 255, 255, 255) : null,
+          // colorBlendMode: BlendMode.modulate,
           width: 40,
           height: 40,
         ),

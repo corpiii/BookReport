@@ -1,4 +1,4 @@
-import 'package:book_report/domain/model/app_error.dart';
+import 'package:book_report/domain/model/common_error.dart';
 import 'package:book_report/domain/model/book.dart';
 import 'package:book_report/domain/model/result.dart';
 import 'package:book_report/domain/usecase/book/delete_book_use_case/delete_book_use_case_impl.dart';
@@ -11,7 +11,7 @@ void main() {
     // given
     final repository = BookManagementRepositoryStub();
     final sut = DeleteBookUseCaseImpl(bookManagementRepository: repository);
-    final dummy = Book(id: '1', title: 'testTitle');
+    final dummy = Book(id: '1', author: '1', title: 'testTitle');
 
     // when
     final result = await sut.execute(dummy);
@@ -20,6 +20,7 @@ void main() {
     switch (result) {
       case Success<Book>():
         expect(result.data.id, dummy.id);
+        expect(result.data.author, dummy.author);
         expect(result.data.title, dummy.title);
       case Error<Book>():
         throwsA(AppError.delete.message);

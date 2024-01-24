@@ -1,5 +1,5 @@
 import 'package:book_report/domain/dto/book_dto.dart';
-import 'package:book_report/domain/model/app_error.dart';
+import 'package:book_report/domain/model/common_error.dart';
 import 'package:book_report/domain/model/book.dart';
 import 'package:book_report/domain/model/result.dart';
 import 'package:book_report/domain/repository/book_management_repository.dart';

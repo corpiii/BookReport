@@ -18,3 +18,24 @@ enum AppError {
     return result;
   }
 }
+
+enum OAuthError {
+  login,
+  notSupported,
+  notDeletedAccount;
+
+  String get message {
+    String result = '';
+
+    switch (OAuthError) {
+      case OAuthError.login:
+        result = 'failed to google login';
+      case OAuthError.notSupported:
+        result = 'not supported method';
+      case OAuthError.notDeletedAccount:
+        result = 'not deleted account';
+    }
+
+    return result;
+  }
+}
