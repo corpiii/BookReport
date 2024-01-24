@@ -10,5 +10,5 @@ final randomAdviceUseCaseProvider = Provider<RandomAdviceUseCase>((ref) {
 });
 
 final oAuthLoginUseCaseProvider = Provider<OAuthLoginUseCase>((ref) {
-  return OAuthLoginUseCaseImpl(googleLoginRepository: ref.watch(googleLoginRepositoryProvider));
+  return OAuthLoginUseCaseImpl(oAuthRepository: ref.watch(oAuthLoginRepositoryProvider));
 });
