@@ -20,11 +20,6 @@ class LoginViewModel extends StateNotifier<LoginViewState> {
 
     switch (result) {
       case Success<User>():
-        print(result.data.id);
-        print(result.data.uid);
-        print(result.data.displayName);
-        print(result.data.email);
-        print(result.data.photoUrl);
         break;
       case Error<User>():
         print(result.e);

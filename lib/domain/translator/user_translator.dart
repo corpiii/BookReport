@@ -5,12 +5,11 @@ import 'package:book_report/domain/translator/interface/translator.dart';
 class UserTranslator implements Translator<UserDTO, User> {
   @override
   UserDTO translateFrom(User data) {
-    return UserDTO(id: data.id, uid: data.uid, email: data.email);
+    return UserDTO(uid: data.uid, displayName: data.displayName, photoUrl: data.photoUrl);
   }
 
   @override
   User translateTo(UserDTO data) {
-    return User(id: data.id, uid: data.uid, email: data.email);
+    return User(uid: data.uid, displayName: data.displayName, photoUrl: data.photoUrl);
   }
-  
 }
