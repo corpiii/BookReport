@@ -4,4 +4,5 @@ import 'package:book_report/domain/model/result.dart';
 
 abstract interface class OAuthLoginRepository {
   Future<Result<UserDTO>> login(OAuthMethod method);
+  Future<void> logout();
 }

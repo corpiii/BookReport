@@ -9,6 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
+  final GoogleLoginService _googleLoginService = GoogleLoginService();
+
   late FirebaseAuth _firebaseAuth;
 
   OAuthLoginRepositoryImpl() {
@@ -31,13 +33,13 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
       case OAuthMethod.apple:
         // TODO: Handle this case.
       case OAuthMethod.google:
-        credential = await GoogleLoginService().login();
+        credential = await _googleLoginService.login();
       case OAuthMethod.kakao:
         // TODO: Handle this case.
       default:
         return Result.error(OAuthError.notSupported.message);
     }
-    
+
     _firebaseAuth.signInWithCredential(credential);
 
     if (_firebaseAuth.currentUser == null) {
@@ -51,5 +53,9 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
       displayName: currentUser.displayName,
       photoUrl: currentUser.photoURL,
     ));
+  }
+
+  Future<void> logout() async {
+    await _firebaseAuth.signOut();
   }
 }
