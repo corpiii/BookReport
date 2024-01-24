@@ -1,4 +1,5 @@
 import 'package:book_report/di/view_model_provider.dart';
+import 'package:book_report/domain/model/oauth_method.dart';
 import 'package:book_report/domain/usecase/oauth_login_use_case/google_login_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,8 +27,7 @@ class OAuthLoginView extends ConsumerWidget {
               onTap: () {
                 final viewModel = ref.read(loginViewModelProvider.notifier);
 
-                viewModel.oAuthLoginUseCase = GoogleLoginUseCase();
-                viewModel.login();
+                viewModel.login(OAuthMethod.google);
               },
             ),
             const SizedBox(width: 30),
