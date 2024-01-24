@@ -20,20 +20,20 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('추가'),
+      title: Text('Add new Book'),
       content: TextField(
         controller: _textEditController,
         decoration: const InputDecoration(
-          hintText: '책 제목',
+          hintText: 'Book title',
         ),
       ),
       actions: [
         TextButton(onPressed: () {
           context.pop();
-        }, child: Text('취소')),
+        }, child: Text('cancel')),
         TextButton(onPressed: () {
-
-        }, child: Text('등록')),
+            // todo createBook
+        }, child: Text('done')),
       ],
     );
   }

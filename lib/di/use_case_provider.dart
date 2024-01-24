@@ -15,6 +15,7 @@ final oAuthLoginUseCaseProvider = Provider<OAuthLoginUseCase>((ref) {
   return OAuthLoginUseCaseImpl(oAuthRepository: ref.watch(oAuthLoginRepositoryProvider));
 });
 
-final oauthLogoutUseCaseProvider = Provider<LogoutUseCase>((ref) {
+final oAuthLogoutUseCaseProvider = Provider<LogoutUseCase>((ref) {
   return LogoutUseCaseImpl(oAuthRepository: ref.watch(oAuthLoginRepositoryProvider));
 });
+
