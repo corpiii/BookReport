@@ -12,6 +12,10 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
   final GoogleLoginService _googleLoginService = GoogleLoginService();
 
   late FirebaseAuth _firebaseAuth;
+  UserDTO? _currentUser;
+
+  @override
+  UserDTO? get currentUser => _currentUser;
 
   OAuthLoginRepositoryImpl() {
     _firebaseInit();
@@ -27,19 +31,24 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
 
   @override
   Future<Result<UserDTO>> login(OAuthMethod method) async {
-    final credential;
+    final Result<OAuthCredential> result;
 
     switch (method) {
       case OAuthMethod.apple:
         // TODO: Handle this case.
       case OAuthMethod.google:
-        credential = await _googleLoginService.login();
+        result = await _googleLoginService.login();
       case OAuthMethod.kakao:
         // TODO: Handle this case.
       default:
         return Result.error(OAuthError.notSupported.message);
     }
 
+    if (result is Error<OAuthCredential>) {
+      return Result.error(result.e);
+    }
+
+    final credential = (result as Success<OAuthCredential>).data;
     _firebaseAuth.signInWithCredential(credential);
 
     if (_firebaseAuth.currentUser == null) {
@@ -48,13 +57,16 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
 
     final currentUser = _firebaseAuth.currentUser!;
 
-    return Result.success(UserDTO(
+    _currentUser = UserDTO(
       uid: currentUser.uid,
       displayName: currentUser.displayName,
       photoUrl: currentUser.photoURL,
-    ));
+    );
+
+    return Result.success(_currentUser!);
   }
 
+  @override
   Future<void> logout() async {
     await _firebaseAuth.signOut();
   }
