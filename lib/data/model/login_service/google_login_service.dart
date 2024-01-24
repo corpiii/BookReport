@@ -24,5 +24,4 @@ class GoogleLoginService implements LoginService {
 
     return Result.success(credential);
   }
-
 }
