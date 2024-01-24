@@ -6,17 +6,25 @@ import 'package:book_report/presentation/login_scene/login_view_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginViewModel extends StateNotifier<LoginViewState> {
-  OAuthLoginUseCase? oAuthLoginUseCase;
+  OAuthLoginUseCase _oAuthLoginUseCase;
 
-  LoginViewModel() : super(LoginViewState());
+  LoginViewModel({
+    required OAuthLoginUseCase oAuthLoginUseCase,
+  })  : _oAuthLoginUseCase = oAuthLoginUseCase,
+        super(LoginViewState());
 
   Future<void> login(OAuthMethod method) async {
-    if (oAuthLoginUseCase == null) return;
+    if (_oAuthLoginUseCase == null) return;
 
-    final result = await oAuthLoginUseCase!.execute(method);
+    final result = await _oAuthLoginUseCase!.execute(method);
 
     switch (result) {
       case Success<User>():
+        print(result.data.id);
+        print(result.data.uid);
+        print(result.data.displayName);
+        print(result.data.email);
+        print(result.data.photoUrl);
         break;
       case Error<User>():
         print(result.e);

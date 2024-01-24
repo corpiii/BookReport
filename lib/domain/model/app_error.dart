@@ -18,3 +18,18 @@ enum AppError {
     return result;
   }
 }
+
+enum OAuthError {
+  loginError;
+
+  String get message {
+    String result = '';
+
+    switch (OAuthError) {
+      case OAuthError.loginError:
+        result = 'failed to google login';
+    }
+
+    return result;
+  }
+}

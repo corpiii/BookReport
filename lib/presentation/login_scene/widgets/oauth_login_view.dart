@@ -1,6 +1,5 @@
 import 'package:book_report/di/view_model_provider.dart';
 import 'package:book_report/domain/model/oauth_method.dart';
-import 'package:book_report/domain/usecase/oauth_login_use_case/google_login_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,6 +9,7 @@ class OAuthLoginView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(loginViewModelProvider);
+    final viewModel = ref.read(loginViewModelProvider.notifier);
 
     return Column(
       children: [
@@ -25,8 +25,6 @@ class OAuthLoginView extends ConsumerWidget {
             _loginIcon(
               'assets/image/google_sign_icon.png',
               onTap: () {
-                final viewModel = ref.read(loginViewModelProvider.notifier);
-
                 viewModel.login(OAuthMethod.google);
               },
             ),

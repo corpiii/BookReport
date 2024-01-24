@@ -10,5 +10,5 @@ final homeViewProvider = StateNotifierProvider<HomeViewModel, HomeViewState>((re
 });
 
 final loginViewModelProvider = StateNotifierProvider<LoginViewModel, LoginViewState>((ref) {
-  return LoginViewModel();
+  return LoginViewModel(oAuthLoginUseCase: ref.watch(oAuthLoginUseCaseProvider));
 });
