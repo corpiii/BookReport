@@ -29,7 +29,10 @@ class MainViewModel extends StateNotifier<MainViewState> {
     await _logoutUseCase.execute();
   }
 
-  Future<Result<void>> deleteAccount() async {
-    return await _deleteAccountUseCase.execute();
+  Future<Result<void>> deleteAccount({required void Function() onComplete}) async {
+    final result = await _deleteAccountUseCase.execute();
+    onComplete();
+
+    return result;
   }
 }

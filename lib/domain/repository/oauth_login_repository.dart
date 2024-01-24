@@ -7,4 +7,5 @@ abstract interface class OAuthLoginRepository {
 
   Future<Result<UserDTO>> login(OAuthMethod method);
   Future<void> logout();
+  Future<Result<void>> deleteAccount();
 }

@@ -35,14 +35,19 @@ class MainView extends ConsumerWidget {
             context.go(loginPath);
           },
           onDeleteAccount: () {
-            _showDialog(context, 'Delete Account', onDelete: () {});
+            _showDialog(context, 'Delete Account', onDelete: () {
+              ref.read(mainViewModelProvider.notifier).deleteAccount(onComplete: () {
+                context.go(loginPath);
+              });
+            });
           },
         ),
         body: SafeArea(
-            child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: _pageList[state.selectedIndex],
-        )),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: _pageList[state.selectedIndex],
+          ),
+        ),
         bottomNavigationBar: _bottomAppBar(viewModel));
   }
 
@@ -108,7 +113,6 @@ class MainView extends ConsumerWidget {
               ),
             ),
           ),
-
         ],
       ),
     );

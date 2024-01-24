@@ -70,4 +70,18 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
   Future<void> logout() async {
     await _firebaseAuth.signOut();
   }
+
+  @override
+  Future<Result<void>> deleteAccount() async {
+    if (_currentUser == null) return Result.error(OAuthError.notDeletedAccount.message);
+
+    // + 모든 책, 독후감 정보도 삭제
+    try {
+      await _firebaseAuth.currentUser!.delete();
+
+      return const Result.success(());
+    } catch (error) {
+      return Result.error(OAuthError.notDeletedAccount.message);
+    }
+  }
 }

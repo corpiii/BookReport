@@ -19,7 +19,7 @@ const reportCreatePath = '$bookReportListPath/reportCreate';
 const reportEditPath = '$bookReportListPath/reportEdit';
 
 final GoRouter routes = GoRouter(
-  initialLocation: '/main',
+  initialLocation: '/',
   routes: [
     GoRoute(
       path: '/',
@@ -28,8 +28,6 @@ final GoRouter routes = GoRouter(
     GoRoute(
       path: '/main',
       builder: (context, state) {
-        // final user = state.extra as User;
-
         return MainView();
       },
       routes: [

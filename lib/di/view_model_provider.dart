@@ -16,5 +16,8 @@ final loginViewModelProvider = StateNotifierProvider<LoginViewModel, LoginViewSt
 });
 
 final mainViewModelProvider = StateNotifierProvider<MainViewModel, MainViewState>((ref) {
-  return MainViewModel(logoutUseCase: ref.watch(oAuthLogoutUseCaseProvider));
+  return MainViewModel(
+    logoutUseCase: ref.watch(oAuthLogoutUseCaseProvider),
+    deleteAccountUseCase: ref.watch(deleteAccountUseCaseProvider),
+  );
 });

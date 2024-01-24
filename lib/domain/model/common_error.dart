@@ -21,7 +21,8 @@ enum AppError {
 
 enum OAuthError {
   login,
-  notSupported;
+  notSupported,
+  notDeletedAccount;
 
   String get message {
     String result = '';
@@ -31,6 +32,8 @@ enum OAuthError {
         result = 'failed to google login';
       case OAuthError.notSupported:
         result = 'not supported method';
+      case OAuthError.notDeletedAccount:
+        result = 'not deleted account';
     }
 
     return result;
