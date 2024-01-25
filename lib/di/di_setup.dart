@@ -1,5 +1,3 @@
-import 'package:book_report/data/model/login_info.dart';
-import 'package:book_report/data/repository/oauth_login_repository_impl.dart';
 import 'package:book_report/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,7 +8,6 @@ Future<void> diSetup() async {
   final FirebaseAuth firebaseAuth = await _firebaseInit();
 
   getIt.registerSingleton(firebaseAuth);
-  getIt.registerSingleton(LoginInfo());
 }
 
 Future<FirebaseAuth> _firebaseInit() async {

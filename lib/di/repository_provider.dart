@@ -1,4 +1,3 @@
-import 'package:book_report/data/model/login_info.dart';
 import 'package:book_report/data/repository/book_management_repository_impl.dart';
 import 'package:book_report/data/repository/oauth_login_repository_impl.dart';
 import 'package:book_report/data/repository/random_advice_repostiroy_impl.dart';
@@ -14,11 +13,8 @@ final randomAdviceRepositoryProvider = Provider<RandomAdviceRepository>((ref) {
 });
 
 final oAuthLoginRepositoryProvider = Provider<OAuthLoginRepository>((ref) {
-  final getIt = GetIt.instance;
-
   return OAuthLoginRepositoryImpl(
-    loginInfo: getIt.get<LoginInfo>(),
-    firebaseAuth: getIt.get<FirebaseAuth>(),
+    firebaseAuth: GetIt.instance.get<FirebaseAuth>(),
   );
 });
 
