@@ -1,6 +1,6 @@
 import 'package:book_report/data/model/login_info.dart';
 import 'package:book_report/data/model/login_service/google_login_service.dart';
-import 'package:book_report/domain/dto/user_dto.dart';
+import 'package:book_report/data/model/login_user.dart';
 import 'package:book_report/domain/model/common_error.dart';
 import 'package:book_report/domain/model/oauth_method.dart';
 import 'package:book_report/domain/model/result.dart';
@@ -28,7 +28,7 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
   }
 
   @override
-  Future<Result<UserDTO>> login(OAuthMethod method) async {
+  Future<Result<bool>> login(OAuthMethod method) async {
     final Result<OAuthCredential> result;
 
     switch (method) {
@@ -55,13 +55,13 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
 
     final currentUser = _firebaseAuth.currentUser!;
 
-    _loginInfo.currentUser = UserDTO(
+    _loginInfo.currentUser = LoginUser(
       uid: currentUser.uid,
       displayName: currentUser.displayName,
       photoUrl: currentUser.photoURL,
     );
 
-    return Result.success(_loginInfo.currentUser!);
+    return Result.success(true);
   }
 
   @override

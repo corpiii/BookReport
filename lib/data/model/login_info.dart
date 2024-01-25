@@ -1,5 +1,6 @@
-import 'package:book_report/domain/dto/user_dto.dart';
+import 'package:book_report/data/model/login_user.dart';
 
 class LoginInfo {
-  UserDTO? currentUser;
+  LoginUser? currentUser;
+  bool get isGuest => currentUser == null;
 }

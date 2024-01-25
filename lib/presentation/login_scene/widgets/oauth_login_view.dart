@@ -31,7 +31,7 @@ class OAuthLoginView extends ConsumerWidget {
               onTap: () {
                 viewModel.login(
                   method: OAuthMethod.google,
-                  onComplete: (user) {
+                  onComplete: () {
                     context.go(mainPath);
                   },
                   onError: (message) {
