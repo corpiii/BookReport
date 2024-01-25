@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class CustomAlertDialog extends StatefulWidget {
-  const CustomAlertDialog({super.key});
+class CreateBookAlertDialog extends StatefulWidget {
+  const CreateBookAlertDialog({super.key});
 
   @override
-  State<CustomAlertDialog> createState() => _CustomAlertDialogState();
+  State<CreateBookAlertDialog> createState() => _CreateBookAlertDialogState();
 }
 
-class _CustomAlertDialogState extends State<CustomAlertDialog> {
+class _CreateBookAlertDialogState extends State<CreateBookAlertDialog> {
   final _textEditController = TextEditingController();
 
   @override

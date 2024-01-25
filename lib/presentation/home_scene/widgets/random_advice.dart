@@ -17,7 +17,6 @@ class RandomAdvice extends ConsumerWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            // color: Colors.green[300],
           ),
           width: MediaQuery.of(context).size.width * 0.85,
           height: 100,
