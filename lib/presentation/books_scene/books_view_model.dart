@@ -22,7 +22,9 @@ class BooksViewModel extends StateNotifier<BooksViewState> {
         _deleteBookUseCase = deleteBookUseCase,
         _editBookUseCase = editBookUseCase,
         _fetchBookUseCase = fetchBookUseCase,
-        super(const BooksViewState());
+        super(const BooksViewState()) {
+    fetchBookList();
+  }
 
   Future<Result<void>> createBook({required String title}) async {
     final result = await _createBookUseCase.execute(title: title);
