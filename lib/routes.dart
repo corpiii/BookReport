@@ -1,4 +1,3 @@
-import 'package:book_report/data/model/login_user.dart';
 import 'package:book_report/presentation/books_scene/book_report_create_scene/book_report_create_view.dart';
 import 'package:book_report/presentation/books_scene/book_report_detail_scene/book_report_detail_view.dart';
 import 'package:book_report/presentation/books_scene/book_report_edit_scene/book_report_edit_view.dart';
@@ -8,7 +7,6 @@ import 'package:book_report/presentation/login_scene/login_view.dart';
 import 'package:book_report/presentation/main_scene/main_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
