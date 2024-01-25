@@ -1,5 +1,6 @@
+import 'package:book_report/data/model/login_info.dart';
 import 'package:book_report/data/model/login_service/google_login_service.dart';
-import 'package:book_report/domain/dto/user_dto.dart';
+import 'package:book_report/data/model/login_user.dart';
 import 'package:book_report/domain/model/common_error.dart';
 import 'package:book_report/domain/model/oauth_method.dart';
 import 'package:book_report/domain/model/result.dart';
@@ -12,12 +13,9 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
   final GoogleLoginService _googleLoginService = GoogleLoginService();
 
   late FirebaseAuth _firebaseAuth;
-  UserDTO? _currentUser;
+  final LoginInfo _loginInfo;
 
-  @override
-  UserDTO? get currentUser => _currentUser;
-
-  OAuthLoginRepositoryImpl() {
+  OAuthLoginRepositoryImpl({required LoginInfo loginInfo}) : _loginInfo = loginInfo {
     _firebaseInit();
   }
 
@@ -30,16 +28,16 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
   }
 
   @override
-  Future<Result<UserDTO>> login(OAuthMethod method) async {
+  Future<Result<bool>> login(OAuthMethod method) async {
     final Result<OAuthCredential> result;
 
     switch (method) {
       case OAuthMethod.apple:
-        // TODO: Handle this case.
+      // TODO: Handle this case.
       case OAuthMethod.google:
         result = await _googleLoginService.login();
       case OAuthMethod.kakao:
-        // TODO: Handle this case.
+      // TODO: Handle this case.
       default:
         return Result.error(OAuthError.notSupported.message);
     }
@@ -57,27 +55,29 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
 
     final currentUser = _firebaseAuth.currentUser!;
 
-    _currentUser = UserDTO(
+    _loginInfo.currentUser = LoginUser(
       uid: currentUser.uid,
       displayName: currentUser.displayName,
       photoUrl: currentUser.photoURL,
     );
 
-    return Result.success(_currentUser!);
+    return Result.success(true);
   }
 
   @override
   Future<void> logout() async {
     await _firebaseAuth.signOut();
+    _loginInfo.currentUser = null;
   }
 
   @override
   Future<Result<void>> deleteAccount() async {
-    if (_currentUser == null) return Result.error(OAuthError.notDeletedAccount.message);
+    if (_loginInfo.currentUser == null) return Result.error(OAuthError.notDeletedAccount.message);
 
     // + 모든 책, 독후감 정보도 삭제
     try {
       await _firebaseAuth.currentUser!.delete();
+      _loginInfo.currentUser = null;
 
       return const Result.success(());
     } catch (error) {

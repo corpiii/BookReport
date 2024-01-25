@@ -1,6 +1,5 @@
 import 'package:book_report/di/view_model_provider.dart';
 import 'package:book_report/domain/model/oauth_method.dart';
-import 'package:book_report/presentation/books_scene/widgets/custom_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -31,7 +30,7 @@ class OAuthLoginView extends ConsumerWidget {
               onTap: () {
                 viewModel.login(
                   method: OAuthMethod.google,
-                  onComplete: (user) {
+                  onComplete: () {
                     context.go(mainPath);
                   },
                   onError: (message) {

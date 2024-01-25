@@ -1,10 +1,10 @@
-class UserDTO {
-  String uid;
+class LoginUser {
+  String? uid;
   String? displayName;
   String? photoUrl;
 
-  UserDTO({
-    required this.uid,
+  LoginUser({
+    this.uid,
     this.displayName,
     this.photoUrl,
   });
