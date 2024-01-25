@@ -21,8 +21,9 @@ class AlertAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         context.pop();
+        await Future.delayed(Duration(milliseconds: 200));
         _onTap();
       },
       child: Center(
