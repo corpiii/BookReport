@@ -5,27 +5,17 @@ import 'package:book_report/domain/model/common_error.dart';
 import 'package:book_report/domain/model/oauth_method.dart';
 import 'package:book_report/domain/model/result.dart';
 import 'package:book_report/domain/repository/oauth_login_repository.dart';
-import 'package:book_report/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
-  final GoogleLoginService _googleLoginService = GoogleLoginService();
-
-  late FirebaseAuth _firebaseAuth;
+  final FirebaseAuth _firebaseAuth;
   final LoginInfo _loginInfo;
 
-  OAuthLoginRepositoryImpl({required LoginInfo loginInfo}) : _loginInfo = loginInfo {
-    _firebaseInit();
-  }
+  final GoogleLoginService _googleLoginService = GoogleLoginService();
 
-  Future<void> _firebaseInit() async {
-    final app = await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-
-    _firebaseAuth = FirebaseAuth.instanceFor(app: app);
-  }
+  OAuthLoginRepositoryImpl({required LoginInfo loginInfo, required FirebaseAuth firebaseAuth})
+      : _loginInfo = loginInfo,
+        _firebaseAuth = firebaseAuth;
 
   @override
   Future<Result<bool>> login(OAuthMethod method) async {
@@ -38,6 +28,9 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
         result = await _googleLoginService.login();
       case OAuthMethod.kakao:
       // TODO: Handle this case.
+      case OAuthMethod.anonymous:
+        _firebaseAuth.signInAnonymously();
+        return Result.success(true);
       default:
         return Result.error(OAuthError.notSupported.message);
     }
