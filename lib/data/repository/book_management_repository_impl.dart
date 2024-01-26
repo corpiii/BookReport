@@ -41,15 +41,16 @@ class BookManagementRepositoryImpl implements BookManagementRepository {
   Future<Result<void>> deleteBook({required BookDTO model}) async {
     if (_firebaseAuth.currentUser == null) return Result.error(AppError.fetch.message);
 
+    final bookCollection = FirebaseFirestore.instance.collection(_bookCollectionName);
+
     try {
-      final searchedModel = await FirebaseFirestore.instance
-          .collection(_bookCollectionName)
+      final searchedModel = await bookCollection
           .where('id', isEqualTo: model.id)
           .limit(1)
           .get();
       final modelId = searchedModel.docs[0].id;
 
-      await FirebaseFirestore.instance.collection(_bookCollectionName).doc(modelId).delete();
+      await bookCollection.doc(modelId).delete();
 
       return Result.success(());
     } catch (_) {
@@ -59,6 +60,7 @@ class BookManagementRepositoryImpl implements BookManagementRepository {
 
   @override
   Future<Result<void>> editBook({required BookDTO model}) {
+
     // TODO: implement editBook
     throw UnimplementedError();
   }
