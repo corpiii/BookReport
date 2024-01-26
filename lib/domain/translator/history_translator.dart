@@ -1,6 +1,6 @@
+import 'package:book_report/common/translator/interface/translator.dart';
 import 'package:book_report/domain/dto/book_history_dto.dart';
 import 'package:book_report/domain/model/book_history.dart';
-import 'package:book_report/domain/translator/interface/translator.dart';
 
 class HistoryTranslator implements Translator<BookHistoryDTO, BookHistory> {
   @override
