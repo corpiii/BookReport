@@ -43,10 +43,11 @@ class _CreateBookAlertDialogState extends State<CreateBookAlertDialog> {
           child: Text('done'),
           onPressed: () async {
             final title = _textEditController.text;
+            final viewModel = ProviderContainer().read(booksViewModelProvider.notifier);
 
             if (title.isNotEmpty) {
-              // await viewModel.createBook(title: title);
-              // await viewModel.fetchBookList();
+              await viewModel.createBook(title: title);
+              await viewModel.fetchBookList();
               context.pop();
             }
           },
