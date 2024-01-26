@@ -9,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BookManagementRepositoryImpl implements BookManagementRepository {
-  final String _bookCollectionName = 'book';
+  final CollectionReference<Map<String, dynamic>> _bookCollection = FirebaseFirestore.instance.collection('book');
   final FirebaseAuth _firebaseAuth;
 
   BookManagementRepositoryImpl({
@@ -27,9 +27,7 @@ class BookManagementRepositoryImpl implements BookManagementRepository {
         title: title,
       );
       
-      await FirebaseFirestore.instance
-          .collection(_bookCollectionName)
-          .add(model.toJson());
+      await _bookCollection.add(model.toJson());
 
       return const Result.success(());
     } catch (error) {
@@ -41,16 +39,14 @@ class BookManagementRepositoryImpl implements BookManagementRepository {
   Future<Result<void>> deleteBook({required BookDTO model}) async {
     if (_firebaseAuth.currentUser == null) return Result.error(AppError.fetch.message);
 
-    final bookCollection = FirebaseFirestore.instance.collection(_bookCollectionName);
-
     try {
-      final searchedModel = await bookCollection
+      final searchedModel = await _bookCollection
           .where('id', isEqualTo: model.id)
           .limit(1)
           .get();
       final modelId = searchedModel.docs[0].id;
 
-      await bookCollection.doc(modelId).delete();
+      await _bookCollection.doc(modelId).delete();
 
       return Result.success(());
     } catch (_) {
@@ -59,10 +55,22 @@ class BookManagementRepositoryImpl implements BookManagementRepository {
   }
 
   @override
-  Future<Result<void>> editBook({required BookDTO model}) {
+  Future<Result<void>> editBook({required BookDTO model}) async {
+    if (_firebaseAuth.currentUser == null) return Result.error(AppError.edit.message);
 
-    // TODO: implement editBook
-    throw UnimplementedError();
+    try {
+      final translator = BookDAOTranslator();
+      final searchedModel = await _bookCollection
+          .where('id', isEqualTo: model.id)
+          .limit(1)
+          .get();
+      final modelId = searchedModel.docs[0].id;
+      await _bookCollection.doc(modelId).update(translator.translateFrom(model).toJson());
+
+      return Result.success(());
+    } catch (_) {
+      return Result.error(AppError.edit.message);
+    }
   }
 
   @override
@@ -70,8 +78,7 @@ class BookManagementRepositoryImpl implements BookManagementRepository {
     if (_firebaseAuth.currentUser == null) return Result.error(AppError.fetch.message);
 
     try {
-      final snapshots = await FirebaseFirestore.instance
-          .collection(_bookCollectionName)
+      final snapshots = await _bookCollection
           .where('author', isEqualTo: _firebaseAuth.currentUser!.uid)
           .get();
       final bookDAOList = snapshots.docs.map((e) => BookDAO.fromJson(e.data())).toList();
