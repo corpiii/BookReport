@@ -22,7 +22,7 @@ class BookListItem extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) {
-            return BookEditDeleteAlert();
+            return BookEditDeleteAlert(model: _model);
           },
         );
       },
