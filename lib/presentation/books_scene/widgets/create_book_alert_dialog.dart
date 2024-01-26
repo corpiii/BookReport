@@ -1,8 +1,16 @@
+import 'package:book_report/di/view_model_provider.dart';
+import 'package:book_report/presentation/books_scene/books_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class CreateBookAlertDialog extends StatefulWidget {
-  const CreateBookAlertDialog({super.key});
+  final BooksViewModel _viewModel;
+
+  const CreateBookAlertDialog({
+    super.key,
+    required BooksViewModel viewModel,
+  }) : _viewModel = viewModel;
 
   @override
   State<CreateBookAlertDialog> createState() => _CreateBookAlertDialogState();
@@ -28,12 +36,25 @@ class _CreateBookAlertDialogState extends State<CreateBookAlertDialog> {
         ),
       ),
       actions: [
-        TextButton(onPressed: () {
-          context.pop();
-        }, child: Text('cancel')),
-        TextButton(onPressed: () {
-            // todo createBook
-        }, child: Text('done')),
+        TextButton(
+          child: Text('cancel'),
+          onPressed: () {
+            context.pop();
+          },
+        ),
+        TextButton(
+          child: Text('done'),
+          onPressed: () async {
+            final viewModel = widget._viewModel;
+            final title = _textEditController.text;
+
+            if (title.isNotEmpty) {
+              await viewModel.createBook(title: title);
+              await viewModel.fetchBookList();
+              context.pop();
+            }
+          },
+        ),
       ],
     );
   }
