@@ -30,9 +30,9 @@ class BooksViewModel extends StateNotifier<BooksViewState> {
     final result = await _createBookUseCase.execute(title: title);
 
     switch (result) {
-      case Success<Book>():
-        return const Result.success(());
-      case Error<Book>():
+      case Success<void>():
+        return Result.success(result.data);
+      case Error<void>():
         return Result.error(result.e);
     }
   }
@@ -54,9 +54,9 @@ class BooksViewModel extends StateNotifier<BooksViewState> {
     final result = await _editBookUseCase.execute(model);
 
     switch (result) {
-      case Success<Book>():
-        return const Result.success(());
-      case Error<Book>():
+      case Success<void>():
+        return Result.success(result.data);
+      case Error<void>():
         return Result.error(result.e);
     }
   }
@@ -65,9 +65,9 @@ class BooksViewModel extends StateNotifier<BooksViewState> {
     final result = await _deleteBookUseCase.execute(model);
 
     switch (result) {
-      case Success<Book>():
-        return const Result.success(());
-      case Error<Book>():
+      case Success<void>():
+        return Result.success(result.data);
+      case Error<void>():
         return Result.error(result.e);
     }
   }

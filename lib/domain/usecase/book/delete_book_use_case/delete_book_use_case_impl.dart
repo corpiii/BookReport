@@ -14,17 +14,15 @@ class DeleteBookUseCaseImpl implements DeleteBookUseCase {
   }) : _bookManagementRepository = bookManagementRepository;
 
   @override
-  Future<Result<Book>> execute(Book model) async {
+  Future<Result<void>> execute(Book model) async {
     final translator = BookTranslator();
     final dto = translator.translateFrom(model);
     final result = await _bookManagementRepository.deleteBook(model: dto);
 
     switch (result) {
-      case Success<BookDTO>():
-        final data = translator.translateTo(result.data);
-
-        return Result.success(data);
-      case Error<BookDTO>():
+      case Success<void>():
+        return Result.success(result.data);
+      case Error<void>():
         return Result.error(AppError.delete.message);
     }
   }

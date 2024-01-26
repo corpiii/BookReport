@@ -8,7 +8,7 @@ import 'book_dummy.dart';
 
 class BookManagementRepositoryStub implements BookManagementRepository {
   @override
-  Future<Result<BookDTO>> createBook({required String title}) async {
+  Future<Result<void>> createBook({required String id, required String title}) async {
     final dto = BookDTO(id: '1', author: '1', title: title);
 
     return Result.success(dto);
