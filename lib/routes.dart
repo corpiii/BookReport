@@ -1,4 +1,3 @@
-import 'package:book_report/data/model/login_user.dart';
 import 'package:book_report/presentation/books_scene/book_report_create_scene/book_report_create_view.dart';
 import 'package:book_report/presentation/books_scene/book_report_detail_scene/book_report_detail_view.dart';
 import 'package:book_report/presentation/books_scene/book_report_edit_scene/book_report_edit_view.dart';
@@ -6,7 +5,9 @@ import 'package:book_report/presentation/books_scene/book_report_list_scene/book
 import 'package:book_report/presentation/home_scene/notification_setting_scene/notification_setting_view.dart';
 import 'package:book_report/presentation/login_scene/login_view.dart';
 import 'package:book_report/presentation/main_scene/main_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 const loginPath = '/';
@@ -23,7 +24,15 @@ final GoRouter routes = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const LoginView(),
+      builder: (context, state) {
+        final firebaseAuth = GetIt.instance.get<FirebaseAuth>();
+
+        if (firebaseAuth.currentUser == null) {
+          return const LoginView();
+        }
+
+        return MainView();
+      }
     ),
     GoRoute(
       path: '/main',

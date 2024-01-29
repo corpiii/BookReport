@@ -22,7 +22,7 @@ class RoundedTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       minLines: _maxLines,
       maxLines: _maxLines,
       cursorColor: _color,

@@ -1,3 +1,3 @@
 enum OAuthMethod {
-  apple, google, kakao;
+  apple, google, kakao, anonymous;
 }

@@ -1,16 +1,15 @@
+import 'package:book_report/di/view_model_provider.dart';
+import 'package:book_report/domain/model/book.dart';
 import 'package:book_report/presentation/books_scene/book_list_scene/widgets/book_edit_alert.dart';
-import 'package:book_report/presentation/common/rounded_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class BookEditDeleteAlert extends StatefulWidget {
-  const BookEditDeleteAlert({super.key});
+class BookEditDeleteAlert extends StatelessWidget {
+  final Book _model;
 
-  @override
-  State<BookEditDeleteAlert> createState() => _BookEditDeleteAlertState();
-}
+  const BookEditDeleteAlert({super.key, required Book model}): _model = model;
 
-class _BookEditDeleteAlertState extends State<BookEditDeleteAlert> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -26,7 +25,7 @@ class _BookEditDeleteAlertState extends State<BookEditDeleteAlert> {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return BookEditAlert();
+                    return BookEditAlert(model: _model);
                   },
                 );
               },
@@ -38,7 +37,13 @@ class _BookEditDeleteAlertState extends State<BookEditDeleteAlert> {
                   color: Colors.red,
                 ),
               ),
-              onTap: () {},
+              onTap: () async {
+                final viewModel = ProviderContainer().read(booksViewModelProvider.notifier);
+
+                await viewModel.deleteBook(model: _model);
+                viewModel.fetchBookList();
+                context.pop();
+              },
             ),
           ],
         ),

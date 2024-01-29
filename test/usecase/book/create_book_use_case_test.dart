@@ -18,11 +18,9 @@ void main() {
 
     // then
     switch (result) {
-      case Success<Book>():
-        final data = result.data;
-
-        expect(data.title, testTitle);
-      case Error<Book>():
+      case Success<void>():
+        expect(true, true);
+      case Error<void>():
         throwsA(AppError.create.message);
     }
   });

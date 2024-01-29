@@ -18,7 +18,7 @@ class NotificationInfo extends StatelessWidget {
           color: Colors.blue,
         ),
         width: MediaQuery.of(context).size.width,
-        height: 100,
+        height: 120,
         child: Center(
           child: Text(''),
         ),

@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:book_report/data/model/login_user.dart';
 
 part 'main_view_state.freezed.dart';
 
