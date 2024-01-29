@@ -31,6 +31,9 @@ class BookListItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.0),
           color: Colors.blue,
         ),
+        child: Center(
+          child: Text(_model.title),
+        ),
       ),
     );
   }

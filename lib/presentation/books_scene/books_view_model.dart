@@ -50,8 +50,9 @@ class BooksViewModel extends StateNotifier<BooksViewState> {
     }
   }
 
-  Future<Result<void>> editBook({required Book model}) async {
-    final result = await _editBookUseCase.execute(model);
+  Future<Result<void>> editBook({required Book model, required String updatedTitle}) async {
+    final updatedModel = model.copyWith(title: updatedTitle);
+    final result = await _editBookUseCase.execute(updatedModel);
 
     switch (result) {
       case Success<void>():

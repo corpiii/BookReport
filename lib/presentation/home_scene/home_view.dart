@@ -16,10 +16,12 @@ class HomeView extends StatelessWidget {
       children: [
         RandomAdvice(),
         SizedBox(height: 20,),
-        SessionTitle('최근 읽은 책'),
+        SessionTitle('Last books'),
         SizedBox(height: 10,),
         LatestBookHistory(),
         SizedBox(height: 50,),
+        SessionTitle('Read Notification'),
+        SizedBox(height: 10,),
         NotificationInfo(onTap: () {
           context.go(notificationSettingPath);
         },),

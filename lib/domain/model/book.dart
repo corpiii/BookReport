@@ -10,13 +10,11 @@ class Book {
   });
 
   Book copyWith({
-    String? author,
-    String? id,
     String? title,
   }) {
     return Book(
-      author: author ?? this.author,
-      id: id ?? this.id,
+      author: this.author,
+      id: this.id,
       title: title ?? this.title,
     );
   }
