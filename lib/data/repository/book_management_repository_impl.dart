@@ -25,6 +25,7 @@ class BookManagementRepositoryImpl implements BookManagementRepository {
         id: id,
         author: _firebaseAuth.currentUser!.uid,
         title: title,
+        timestamp: DateTime.now().toIso8601String(),
       );
       
       await _bookCollection.add(model.toJson());

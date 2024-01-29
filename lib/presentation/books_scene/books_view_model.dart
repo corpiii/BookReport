@@ -42,6 +42,7 @@ class BooksViewModel extends StateNotifier<BooksViewState> {
 
     switch (result) {
       case Success<List<Book>>():
+        // need sort
         state = state.copyWith(bookList: result.data);
 
         return const Result.success(());

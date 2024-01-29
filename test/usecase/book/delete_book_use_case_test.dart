@@ -11,7 +11,7 @@ void main() {
     // given
     final repository = BookManagementRepositoryStub();
     final sut = DeleteBookUseCaseImpl(bookManagementRepository: repository);
-    final dummy = Book(id: '1', author: '1', title: 'testTitle');
+    final dummy = Book(id: '1', author: '1', title: 'testTitle', timestamp: DateTime.now());
 
     // when
     final result = await sut.execute(dummy);

@@ -9,6 +9,7 @@ class BookDAOTranslator implements Translator<BookDAO, BookDTO> {
       id: data.id,
       author: data.author,
       title: data.title,
+      timestamp: data.timestamp,
     );
   }
 
@@ -18,6 +19,7 @@ class BookDAOTranslator implements Translator<BookDAO, BookDTO> {
       id: data.id,
       author: data.author,
       title: data.title,
+      timestamp: data.timestamp,
     );
   }
 }
