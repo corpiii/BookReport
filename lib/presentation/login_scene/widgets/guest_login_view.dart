@@ -49,7 +49,7 @@ class GuestLoginView extends ConsumerWidget {
       context: context,
       builder: (context) {
         return CustomAlert(
-          child: Text('Nothing is saved in guest mode.'),
+          child: Text('Guest will remove after 30 Days.'),
           actions: [doneAction],
         );
       }

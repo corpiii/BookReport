@@ -24,9 +24,9 @@ final _getIt = GetIt.instance;
 Future<void> diSetup() async {
   await _firebaseRegister();
 
-  _repositoryRegister();
-  _useCaseRegister();
-  _viewModelRegister();
+  await _repositoryRegister();
+  await _useCaseRegister();
+  await _viewModelRegister();
 }
 
 Future<void> _firebaseRegister() async {
@@ -38,13 +38,13 @@ Future<void> _firebaseRegister() async {
   _getIt.registerSingleton(firebaseAuth);
 }
 
-void _repositoryRegister() {
+Future<void> _repositoryRegister() async {
   _getIt.registerSingleton(RandomAdviceRepositoryImpl());
   _getIt.registerSingleton(OAuthLoginRepositoryImpl(firebaseAuth: _getIt.get()));
   _getIt.registerSingleton(BookManagementRepositoryImpl(firebaseAuth: _getIt.get()));
 }
 
-void _useCaseRegister() {
+Future<void> _useCaseRegister() async {
   final OAuthLoginRepositoryImpl oAuthLoginRepositoryImpl = _getIt.get();
   final BookManagementRepositoryImpl bookManagementRepositoryImpl = _getIt.get();
 
@@ -62,7 +62,7 @@ void _useCaseRegister() {
   _getIt.registerSingleton(DeleteBookUseCaseImpl(bookManagementRepository: bookManagementRepositoryImpl));
 }
 
-void _viewModelRegister() {
+Future<void> _viewModelRegister() async {
   _getIt.registerSingleton(LoginViewModel(oAuthLoginUseCase: _getIt.get<OAuthLoginUseCaseImpl>()));
   _getIt.registerSingleton(MainViewModel(
     logoutUseCase: _getIt.get<LogoutUseCaseImpl>(),

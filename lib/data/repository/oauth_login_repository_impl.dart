@@ -37,7 +37,7 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
     }
 
     final credential = (result as Success<OAuthCredential>).data;
-    _firebaseAuth.signInWithCredential(credential);
+    await _firebaseAuth.signInWithCredential(credential);
 
     if (_firebaseAuth.currentUser == null) {
       return Result.error(OAuthError.login.message);

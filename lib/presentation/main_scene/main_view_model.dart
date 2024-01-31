@@ -25,8 +25,10 @@ class MainViewModel extends StateNotifier<MainViewState> {
     }
   }
 
-  Future<void> logout() async {
+  Future<void> logout({required void Function() completion}) async {
     await _logoutUseCase.execute();
+    print('logout success in main view Model');
+    completion();
   }
 
   Future<Result<void>> deleteAccount({required void Function() onComplete}) async {

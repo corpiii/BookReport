@@ -31,12 +31,15 @@ class MainView extends ConsumerWidget {
         ),
         drawer: DrawerView(
           onLogout: () {
-            viewModel.logout();
-            context.go(loginPath);
+            viewModel.logout(completion: () {
+              print('complete logout?');
+              context.go(loginPath);
+              print('??');
+            });
           },
           onDeleteAccount: () {
             _showDialog(context, 'Delete Account', onDelete: () {
-              ref.read(mainViewModelProvider.notifier).deleteAccount(onComplete: () {
+              viewModel.deleteAccount(onComplete: () {
                 context.go(loginPath);
               });
             });
