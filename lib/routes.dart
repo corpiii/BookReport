@@ -1,3 +1,4 @@
+import 'package:book_report/domain/model/book.dart';
 import 'package:book_report/presentation/books_scene/book_report_create_scene/book_report_create_view.dart';
 import 'package:book_report/presentation/books_scene/book_report_detail_scene/book_report_detail_view.dart';
 import 'package:book_report/presentation/books_scene/book_report_edit_scene/book_report_edit_view.dart';
@@ -62,7 +63,8 @@ final GoRouter routes = GoRouter(
         GoRoute(
             path: 'bookReportList',
             builder: (context, state) {
-              // state.extra BookModel
+              final model = state.extra as Book;
+
               return BookReportListView();
             },
             routes: [

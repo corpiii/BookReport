@@ -28,8 +28,7 @@ class BookList extends ConsumerWidget {
             return BookListItem(
                 model: model,
                 onTap: () {
-                  // need model
-                  context.push(bookReportListPath);
+                  context.push(bookReportListPath, extra: model);
                 });
           }),
     );
