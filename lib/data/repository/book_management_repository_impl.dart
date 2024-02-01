@@ -27,9 +27,9 @@ class BookManagementRepositoryImpl implements BookManagementRepository {
         title: title,
         timestamp: DateTime.now().toIso8601String(),
       );
-      
-      await _bookCollection.add(model.toJson());
 
+      await _bookCollection.add(model.toJson());
+      
       return const Result.success(());
     } catch (error) {
       return Result.error(AppError.create.message);

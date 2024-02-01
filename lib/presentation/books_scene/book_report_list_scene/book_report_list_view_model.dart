@@ -16,13 +16,13 @@ class BookReportListViewModel extends StateNotifier<BookReportListViewState> {
     required FetchBookReportListUseCase fetchBookReportListUseCase,
   })  : _bookModel = bookModel,
         _fetchBookReportListUseCase = fetchBookReportListUseCase,
-        super(BookReportListViewState());
+        super(BookReportListViewState(bookModel: bookModel));
 
   Future<void> fetchBookReportList({
     required void Function() onComplete,
     required void Function(String message) onError,
   }) async {
-    final result = await _fetchBookReportListUseCase.execute();
+    final result = await _fetchBookReportListUseCase.execute(bookId: _bookModel.id);
 
     switch (result) {
       case Success<List<BookReport>>():

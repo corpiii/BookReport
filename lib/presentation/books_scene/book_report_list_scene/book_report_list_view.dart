@@ -1,25 +1,24 @@
+import 'package:book_report/di/view_model_provider.dart';
 import 'package:book_report/presentation/books_scene/book_report_list_scene/widgets/report_add_button.dart';
 import 'package:book_report/presentation/books_scene/book_report_list_scene/widgets/report_list.dart';
 import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:book_report/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class BookReportListView extends StatefulWidget {
-  const BookReportListView({super.key});
+class BookReportListView extends StatelessWidget {
+  final String _title;
 
-  @override
-  State<BookReportListView> createState() => _BookReportListViewState();
-}
+  const BookReportListView({super.key, required String title}) : _title = title;
 
-class _BookReportListViewState extends State<BookReportListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorConstant.backgroundColor,
       appBar: AppBar(
         backgroundColor: ColorConstant.backgroundColor,
-        title: Text('Book Title'),
+        title: Text(_title),
       ),
       body: SafeArea(
         child: Padding(

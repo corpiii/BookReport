@@ -1,3 +1,4 @@
+import 'package:book_report/domain/model/book.dart';
 import 'package:book_report/domain/model/book_report.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -9,6 +10,6 @@ part 'book_report_list_view_state.freezed.dart';
 class BookReportListViewState with _$BookReportListViewState {
   const factory BookReportListViewState({
     @Default([]) List<BookReport> bookReportList,
+    required Book bookModel,
   }) = _BookReportListViewState;
-
 }
