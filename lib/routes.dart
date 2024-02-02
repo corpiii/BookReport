@@ -66,14 +66,10 @@ final GoRouter routes = GoRouter(
             path: 'bookReportList',
             builder: (context, state) {
               final model = state.extra as Book;
-              final fetchBookReportListUseCase = _getIt.get<FetchBookReportListUseCaseImpl>();
+              final bookReportListViewModel = _getIt.get<BookReportListViewModel>();
+              bookReportListViewModel.bookModel = model;
 
-              _getIt.registerSingleton(BookReportListViewModel(
-                bookModel: model,
-                fetchBookReportListUseCase: fetchBookReportListUseCase,
-              ));
-
-              return BookReportListView();
+              return BookReportListView(title: model.title);
             },
             routes: [
               GoRoute(

@@ -46,7 +46,7 @@ Future<void> _repositoryRegister() async {
   _getIt.registerSingleton(OAuthLoginRepositoryImpl(firebaseAuth: _getIt.get()));
   _getIt.registerSingleton(BookManagementRepositoryImpl(firebaseAuth: _getIt.get()));
 
-  _getIt.registerSingleton(BookManagementRepositoryImpl(firebaseAuth: _getIt.get()));
+  _getIt.registerSingleton(BookReportManagementRepositoryImpl(firebaseAuth: _getIt.get()));
 }
 
 Future<void> _useCaseRegister() async {
@@ -67,7 +67,8 @@ Future<void> _useCaseRegister() async {
   _getIt.registerSingleton(EditBookUseCaseImpl(bookManagementRepository: bookManagementRepositoryImpl));
   _getIt.registerSingleton(DeleteBookUseCaseImpl(bookManagementRepository: bookManagementRepositoryImpl));
 
-  _getIt.registerSingleton(FetchBookReportListUseCaseImpl(bookReportManagementRepository: bookReportManagementRepositoryImpl));
+  _getIt.registerSingleton(
+      FetchBookReportListUseCaseImpl(bookReportManagementRepository: bookReportManagementRepositoryImpl));
 }
 
 Future<void> _viewModelRegister() async {
@@ -83,4 +84,6 @@ Future<void> _viewModelRegister() async {
     editBookUseCase: _getIt.get<EditBookUseCaseImpl>(),
     fetchBookUseCase: _getIt.get<FetchBookUseCaseImpl>(),
   ));
+  _getIt.registerSingleton(
+      BookReportListViewModel(fetchBookReportListUseCase: _getIt.get<FetchBookReportListUseCaseImpl>()));
 }
