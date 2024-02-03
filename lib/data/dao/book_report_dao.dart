@@ -1,11 +1,11 @@
-class BookReportDTO {
+class BookReportDAO {
   String id;
   String author;
   String title;
   String content;
   String timestamp;
 
-  BookReportDTO({
+  BookReportDAO({
     required this.id,
     required this.author,
     required this.title,
