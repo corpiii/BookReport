@@ -10,7 +10,7 @@ import 'package:uuid/uuid.dart';
 
 class BookReportManagementRepositoryImpl implements BookReportManagementRepository {
   final CollectionReference<Map<String, dynamic>> _bookReportCollection =
-  FirebaseFirestore.instance.collection('bookReport');
+      FirebaseFirestore.instance.collection('bookReport');
   final FirebaseAuth _firebaseAuth;
 
   BookReportManagementRepositoryImpl({
@@ -27,11 +27,13 @@ class BookReportManagementRepositoryImpl implements BookReportManagementReposito
 
     try {
       final userID = _firebaseAuth.currentUser!;
-      final dao = BookReportDAO(id: Uuid().v1(),
+      final dao = BookReportDAO(
+        id: Uuid().v1(),
         author: userID.uid,
         title: title,
         content: content,
-        timestamp: DateTime.now().toIso8601String());
+        timestamp: DateTime.now().toIso8601String(),
+      );
 
       await _bookReportCollection.doc(userID.uid).collection(bookId).add(dao.toJson());
 
@@ -59,9 +61,30 @@ class BookReportManagementRepositoryImpl implements BookReportManagementReposito
   }
 
   @override
-  Future<Result<void>> editBookReport({required String bookId, required BookReportDTO report}) {
-    // TODO: implement editBookReport
-    throw UnimplementedError();
+  Future<Result<void>> editBookReport({required String bookId, required BookReportDTO report}) async {
+    if (_firebaseAuth.currentUser == null) return Result.error(OAuthError.notExistCurrentUser.message);
+
+    try {
+      final translator = BookReportDAOTranslator();
+      final userID = _firebaseAuth.currentUser!;
+      final modelId = report.id;
+      final snapshot = await _bookReportCollection
+          .doc(userID.uid)
+          .collection(bookId)
+          .where('id', isEqualTo: modelId)
+          .limit(1)
+          .get();
+
+      final searchedModelDocId = snapshot.docs[0].id;
+
+      await _bookReportCollection
+          .doc(searchedModelDocId)
+          .update(translator.translateFrom(report).toJson());
+
+      return Result.success(());
+    } catch (_) {
+      return Result.error(AppError.edit.message);
+    }
   }
 
   @override
