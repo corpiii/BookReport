@@ -6,6 +6,7 @@ import 'package:book_report/domain/model/result.dart';
 import 'package:book_report/domain/repository/book_report_management_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
 
 class BookReportManagementRepositoryImpl implements BookReportManagementRepository {
   final CollectionReference<Map<String, dynamic>> _bookReportCollection =
@@ -18,23 +19,43 @@ class BookReportManagementRepositoryImpl implements BookReportManagementReposito
 
   @override
   Future<Result<void>> createBookReport({
+    required String bookId,
     required String title,
     required String content,
-  }) {
-    throw UnimplementedError();
+  }) async {
+    if (_firebaseAuth.currentUser == null) return Result.error(OAuthError.notExistCurrentUser.message);
+
+    try {
+      final userID = _firebaseAuth.currentUser!;
+      final dao = BookReportDAO(id: Uuid().v1(),
+        author: userID.uid,
+        title: title,
+        content: content,
+        timestamp: DateTime.now().toIso8601String());
+
+      await _bookReportCollection.doc(userID.uid).collection(bookId).add(dao.toJson());
+
+      return Result.success(());
+    } catch (_) {
+      return Result.error(AppError.create.message);
+    }
   }
 
   @override
   Future<Result<List<BookReportDTO>>> fetchAllBookReportBy(String bookId) async {
     if (_firebaseAuth.currentUser == null) return Result.error(OAuthError.notExistCurrentUser.message);
 
-    final userID = _firebaseAuth.currentUser!;
-    final snapshot = await _bookReportCollection.doc(userID.uid).collection(bookId).get();
-    final translator = BookReportDAOTranslator();
-    final bookReportDAOList = snapshot.docs.map((e) => BookReportDAO.fromJson(e.data())).toList();
-    final bookReportDTOList = bookReportDAOList.map((e) => translator.translateTo(e)).toList();
+    try {
+      final userID = _firebaseAuth.currentUser!;
+      final snapshot = await _bookReportCollection.doc(userID.uid).collection(bookId).get();
+      final translator = BookReportDAOTranslator();
+      final bookReportDAOList = snapshot.docs.map((e) => BookReportDAO.fromJson(e.data())).toList();
+      final bookReportDTOList = bookReportDAOList.map((e) => translator.translateTo(e)).toList();
 
-    return Result.success(bookReportDTOList);
+      return Result.success(bookReportDTOList);
+    } catch (_) {
+      return Result.error(AppError.fetch.message);
+    }
   }
 
   @override
