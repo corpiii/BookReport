@@ -8,12 +8,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BookReportListViewModel extends StateNotifier<BookReportListViewState> {
   final FetchBookReportListUseCase _fetchBookReportListUseCase;
-  Book? _bookModel;
 
-  set bookModel(Book model) {
-    _bookModel = model;
+  Future<void> init(Book model) async {
     state = state.copyWith(bookModel: model);
- }
+
+    final result = await _fetchBookReportListUseCase.execute(bookId: state.bookModel!.id);
+
+    switch (result) {
+      case Success<List<BookReport>>():
+        final data = result.data;
+        state = state.copyWith(bookReportList: data);
+
+        return;
+      case Error<List<BookReport>>():
+        return;
+    }
+  }
 
   BookReportListViewModel({
     required FetchBookReportListUseCase fetchBookReportListUseCase,

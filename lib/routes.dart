@@ -67,7 +67,7 @@ final GoRouter routes = GoRouter(
             builder: (context, state) {
               final model = state.extra as Book;
               final bookReportListViewModel = _getIt.get<BookReportListViewModel>();
-              bookReportListViewModel.bookModel = model;
+              bookReportListViewModel.init(model);
 
               return BookReportListView(title: model.title);
             },
