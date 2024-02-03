@@ -21,6 +21,7 @@ enum AppError {
 
 enum OAuthError {
   login,
+  notExistCurrentUser,
   notSupported,
   notDeletedAccount;
 
@@ -30,6 +31,8 @@ enum OAuthError {
     switch (OAuthError) {
       case OAuthError.login:
         result = 'failed to google login';
+      case OAuthError.notExistCurrentUser:
+        result = 'nobody login in app';
       case OAuthError.notSupported:
         result = 'not supported method';
       case OAuthError.notDeletedAccount:
