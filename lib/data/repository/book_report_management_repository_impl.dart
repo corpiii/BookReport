@@ -88,8 +88,28 @@ class BookReportManagementRepositoryImpl implements BookReportManagementReposito
   }
 
   @override
-  Future<Result<void>> deleteBookReport({required String bookId, required BookReportDTO report}) {
-    // TODO: implement deleteBookReport
-    throw UnimplementedError();
+  Future<Result<void>> deleteBookReport({required String bookId, required BookReportDTO report}) async {
+    if (_firebaseAuth.currentUser == null) return Result.error(OAuthError.notExistCurrentUser.message);
+
+    try {
+      final userID = _firebaseAuth.currentUser!;
+      final modelId = report.id;
+      final snapshot = await _bookReportCollection
+          .doc(userID.uid)
+          .collection(bookId)
+          .where('id', isEqualTo: modelId)
+          .limit(1)
+          .get();
+
+      final searchedModelDocId = snapshot.docs[0].id;
+
+      await _bookReportCollection
+          .doc(searchedModelDocId)
+          .delete();
+
+      return Result.success(());
+    } catch (_) {
+      return Result.error(AppError.delete.message);
+    }
   }
 }
