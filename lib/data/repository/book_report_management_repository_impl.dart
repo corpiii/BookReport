@@ -78,6 +78,8 @@ class BookReportManagementRepositoryImpl implements BookReportManagementReposito
       final searchedModelDocId = snapshot.docs[0].id;
 
       await _bookReportCollection
+          .doc(userID.uid)
+          .collection(bookId)
           .doc(searchedModelDocId)
           .update(translator.translateFrom(report).toJson());
 
@@ -104,6 +106,8 @@ class BookReportManagementRepositoryImpl implements BookReportManagementReposito
       final searchedModelDocId = snapshot.docs[0].id;
 
       await _bookReportCollection
+          .doc(userID.uid)
+          .collection(bookId)
           .doc(searchedModelDocId)
           .delete();
 
