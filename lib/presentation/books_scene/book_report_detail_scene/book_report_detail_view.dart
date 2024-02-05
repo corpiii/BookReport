@@ -1,3 +1,5 @@
+import 'package:book_report/di/view_model_provider.dart';
+import 'package:book_report/domain/model/book_report.dart';
 import 'package:book_report/presentation/books_scene/book_report_detail_scene/widgets/radius_box_text.dart';
 import 'package:book_report/presentation/common/app_bar_button.dart';
 import 'package:book_report/presentation/common/color_constant.dart';
@@ -6,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class BookReportDetailView extends StatelessWidget {
-  const BookReportDetailView({super.key});
+  BookReport _model;
+
+  BookReportDetailView({super.key, required BookReport model}) : _model = model;
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +21,18 @@ class BookReportDetailView extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.all(12.0),
-            child: AppBarButton('Edit', onTap: () async {
-              await context.push(reportEditPath);
+            child: AppBarButton('Edit', onTap: () {
+              context.push(reportEditPath, extra: _model);
             }),
           )
         ],
       ),
-      body: const Padding(
+      body: Padding(
         padding: EdgeInsets.all(12.0),
         child: Column(
           children: [
             RadiusBoxText(
-              'fff',
+              _model.title,
               radius: 12.0,
               color: Colors.blue,
               height: 60,
@@ -36,7 +40,7 @@ class BookReportDetailView extends StatelessWidget {
             SizedBox(height: 20,),
             Expanded(
               child: RadiusBoxText(
-                'rrr',
+                _model.content,
                 radius: 12.0,
                 color: Colors.blue,
                 height: 60,

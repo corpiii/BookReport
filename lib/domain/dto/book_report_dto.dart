@@ -3,13 +3,13 @@ class BookReportDTO {
   String author;
   String title;
   String content;
-  DateTime dateTime;
+  String timestamp;
 
   BookReportDTO({
     required this.id,
     required this.author,
     required this.title,
     required this.content,
-    required this.dateTime,
+    required this.timestamp,
   });
 }

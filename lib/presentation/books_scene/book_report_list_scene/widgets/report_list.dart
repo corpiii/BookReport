@@ -1,28 +1,39 @@
+import 'package:book_report/di/view_model_provider.dart';
 import 'package:book_report/presentation/books_scene/book_report_list_scene/widgets/report_list_item.dart';
 import 'package:book_report/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class ReportList extends StatelessWidget {
+class ReportList extends ConsumerWidget {
   const ReportList({super.key});
 
-  // final modelList; // need model List
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.read(bookReportListViewModelProvider.notifier);
+    final state = ref.watch(bookReportListViewModelProvider);
+    final reportList = state.bookReportList;
+
     return ListView.builder(
-      itemCount: 5,
+      itemCount: reportList.length,
       itemBuilder: (context, index) {
         return Dismissible(
             key: Key('$index'),
             background: Container(color: Colors.red),
             direction: DismissDirection.endToStart,
-            onDismissed: (direction) {},
-            child: ReportListItem(onTap: () async {
-              // extra: model[index]
-              await context.push(reportDetailPath);
-            })
-        );
+            onDismissed: (direction) async {
+              await viewModel.deleteBookReport(
+                bookReport: reportList[index],
+                onError: (error) {
+                  print('error');
+                },
+              );
+            },
+            child: ReportListItem(
+                model: reportList[index],
+                onTap: () async {
+                  await context.push(reportDetailPath, extra: reportList[index]);
+                }));
       },
     );
   }

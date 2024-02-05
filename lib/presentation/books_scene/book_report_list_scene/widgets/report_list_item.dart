@@ -1,12 +1,16 @@
+import 'package:book_report/domain/model/book_report.dart';
 import 'package:flutter/material.dart';
 
 class ReportListItem extends StatelessWidget {
   final void Function() _onTap;
+  final BookReport _model;
 
   const ReportListItem({
     super.key,
+    required BookReport model,
     required void Function() onTap,
-  }): _onTap = onTap;
+  })  : _model = model,
+        _onTap = onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +25,7 @@ class ReportListItem extends StatelessWidget {
           ),
           width: double.infinity,
           height: 80,
+          child: Text(_model.title),
         ),
       ),
     );

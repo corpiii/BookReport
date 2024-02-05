@@ -1,3 +1,5 @@
+import 'package:book_report/presentation/books_scene/book_report_list_scene/book_report_list_view_model.dart';
+import 'package:book_report/presentation/books_scene/book_report_list_scene/book_report_list_view_state.dart';
 import 'package:book_report/presentation/books_scene/books_view_model.dart';
 import 'package:book_report/presentation/books_scene/books_view_state.dart';
 import 'package:book_report/presentation/home_scene/home_view_model.dart';
@@ -15,3 +17,5 @@ final homeViewProvider = StateNotifierProvider<HomeViewModel, HomeViewState>((re
 final loginViewModelProvider = StateNotifierProvider<LoginViewModel, LoginViewState>((ref) => _getIt.get());
 final mainViewModelProvider = StateNotifierProvider<MainViewModel, MainViewState>((ref) => _getIt.get());
 final booksViewModelProvider = StateNotifierProvider<BooksViewModel, BooksViewState>((ref) => _getIt.get());
+final bookReportListViewModelProvider =
+    StateNotifierProvider<BookReportListViewModel, BookReportListViewState>((ref) => _getIt.get());

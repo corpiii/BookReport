@@ -1,7 +1,11 @@
+import 'package:book_report/di/view_model_provider.dart';
+import 'package:book_report/presentation/books_scene/book_report_list_scene/book_report_list_view_model.dart';
 import 'package:book_report/presentation/common/app_bar_button.dart';
 import 'package:book_report/presentation/common/rounded_text_field.dart';
 import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class BookReportCreateView extends StatefulWidget {
@@ -17,7 +21,6 @@ class _BookReportCreateViewState extends State<BookReportCreateView> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _titleTextEditingController.dispose();
     _bodyTextEditingController.dispose();
@@ -35,8 +38,17 @@ class _BookReportCreateViewState extends State<BookReportCreateView> {
               'Done',
               color: Colors.green,
               onTap: () {
-                // create model
-                context.pop();
+                final viewModel = ProviderContainer().read(bookReportListViewModelProvider.notifier);
+
+                viewModel.createBookReport(
+                  title: _titleTextEditingController.text,
+                  content: _bodyTextEditingController.text,
+                  onComplete: () async {
+                    await viewModel.fetchBookReportList(onComplete: () {}, onError: (_) {});
+                    context.pop();
+                  },
+                  onError: (error) {},
+                );
               },
             ),
           )
@@ -64,7 +76,10 @@ class _BookReportCreateViewState extends State<BookReportCreateView> {
                 borderRadius: 12,
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height * 0.1,
               )
             ],
           ),
