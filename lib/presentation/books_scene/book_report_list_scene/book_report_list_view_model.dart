@@ -8,6 +8,7 @@ import 'package:book_report/domain/usecase/book_report/edit_book_report_use_case
 import 'package:book_report/domain/usecase/book_report/fetch_book_report_list_use_case/interface/fetch_book_report_list_use_case.dart';
 import 'package:book_report/presentation/books_scene/book_report_list_scene/book_report_list_view_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uuid/uuid.dart';
 
 class BookReportListViewModel extends StateNotifier<BookReportListViewState> {
   final FetchBookReportListUseCase _fetchBookReportListUseCase;
@@ -59,6 +60,66 @@ class BookReportListViewModel extends StateNotifier<BookReportListViewState> {
 
         return;
       case Error<List<BookReport>>():
+        onError(result.e);
+        return;
+    }
+  }
+
+  Future<void> createBookReport({
+    required String title,
+    required String content,
+    required void Function() onComplete,
+    required void Function(String message) onError,
+  }) async {
+    if (state.bookModel == null) return onError(AppError.create.message);
+
+    final result = await _createBookReportUseCase.execute(bookId: Uuid().v1(), title: title, content: content);
+
+    switch (result) {
+      case Success<void>():
+        onComplete();
+        return;
+      case Error<void>():
+        onError(result.e);
+        return;
+    }
+  }
+
+  Future<void> editBookReport({
+    required String bookId,
+    required BookReport bookReport,
+    required void Function() onComplete,
+    required void Function(String message) onError,
+  }) async {
+    if (state.bookModel == null) return onError(AppError.edit.message);
+
+    final result = await _editBookReportUseCase.execute(bookId: bookId, bookReport: bookReport);
+
+    switch (result) {
+      case Success<void>():
+        onComplete();
+        return;
+      case Error<void>():
+        onError(result.e);
+        return;
+    }
+  }
+
+  Future<void> deleteBookReport({
+    required String bookId,
+    required BookReport bookReport,
+    required void Function() onComplete,
+    required void Function(String message) onError,
+  }) async {
+    if (state.bookModel == null) return onError(AppError.delete.message);
+
+    final result = await _editBookReportUseCase.execute(bookId: bookId, bookReport: bookReport);
+
+    switch (result) {
+      case Success<void>():
+        onComplete();
+        return;
+      case Error<void>():
         onError(result.e);
         return;
     }
