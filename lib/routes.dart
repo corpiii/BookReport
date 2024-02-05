@@ -1,4 +1,5 @@
 import 'package:book_report/domain/model/book.dart';
+import 'package:book_report/domain/model/book_report.dart';
 import 'package:book_report/presentation/books_scene/book_report_create_scene/book_report_create_view.dart';
 import 'package:book_report/presentation/books_scene/book_report_detail_scene/book_report_detail_view.dart';
 import 'package:book_report/presentation/books_scene/book_report_edit_scene/book_report_edit_view.dart';
@@ -18,7 +19,7 @@ const notificationSettingPath = '$mainPath/notificationSetting';
 const bookReportListPath = '$mainPath/bookReportList';
 const reportDetailPath = '$bookReportListPath/reportDetail';
 const reportCreatePath = '$bookReportListPath/reportCreate';
-const reportEditPath = '$bookReportListPath/reportEdit';
+const reportEditPath = '$reportDetailPath/reportEdit';
 
 final GoRouter routes = GoRouter(
   initialLocation: '/',
@@ -70,9 +71,20 @@ final GoRouter routes = GoRouter(
                 path: 'reportDetail',
                 builder: (context, state) {
                   // state.extra ReportModel
+                  final model = state.extra as BookReport;
 
-                  return BookReportDetailView();
+                  return BookReportDetailView(model: model);
                 },
+                routes: [
+                  GoRoute(
+                    path: 'reportEdit',
+                    builder: (context, state) {
+                      final model = state.extra as BookReport;
+
+                      return BookReportEditView(model: model);
+                    },
+                  )
+                ],
               ),
               GoRoute(
                   path: 'reportCreate',
@@ -81,13 +93,6 @@ final GoRouter routes = GoRouter(
 
                     return BookReportCreateView();
                   }),
-              GoRoute(
-                  path: 'reportEdit',
-                  builder: (context, state) {
-                    // state.extra
-
-                    return BookReportEditView();
-                  })
             ]),
       ],
     ),
