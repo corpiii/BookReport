@@ -13,6 +13,7 @@ class ReportList extends ConsumerWidget {
     final viewModel = ref.read(bookReportListViewModelProvider.notifier);
     final state = ref.watch(bookReportListViewModelProvider);
     final reportList = state.bookReportList;
+    print(viewModel.bookModel?.title);
 
     return ListView.builder(
       itemCount: reportList.length,
@@ -21,8 +22,13 @@ class ReportList extends ConsumerWidget {
             key: Key('$index'),
             background: Container(color: Colors.red),
             direction: DismissDirection.endToStart,
-            onDismissed: (direction) {
-              // viewModel.deleteReport(reportList[index]);
+            onDismissed: (direction) async {
+              await viewModel.deleteBookReport(
+                bookReport: reportList[index],
+                onError: (error) {
+                  print('error');
+                },
+              );
             },
             child: ReportListItem(
                 model: reportList[index],

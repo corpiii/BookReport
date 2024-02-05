@@ -17,8 +17,8 @@ class BookReportDetailView extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.all(12.0),
-            child: AppBarButton('Edit', onTap: () async {
-              await context.push(reportEditPath);
+            child: AppBarButton('Edit', onTap: () {
+              context.push(reportEditPath);
             }),
           )
         ],
@@ -28,7 +28,7 @@ class BookReportDetailView extends StatelessWidget {
         child: Column(
           children: [
             RadiusBoxText(
-              'fff',
+              'title',
               radius: 12.0,
               color: Colors.blue,
               height: 60,
@@ -36,7 +36,7 @@ class BookReportDetailView extends StatelessWidget {
             SizedBox(height: 20,),
             Expanded(
               child: RadiusBoxText(
-                'rrr',
+                'content',
                 radius: 12.0,
                 color: Colors.blue,
                 height: 60,

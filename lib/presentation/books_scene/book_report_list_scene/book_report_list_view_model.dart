@@ -8,36 +8,21 @@ import 'package:book_report/domain/usecase/book_report/edit_book_report_use_case
 import 'package:book_report/domain/usecase/book_report/fetch_book_report_list_use_case/interface/fetch_book_report_list_use_case.dart';
 import 'package:book_report/presentation/books_scene/book_report_list_scene/book_report_list_view_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uuid/uuid.dart';
 
 class BookReportListViewModel extends StateNotifier<BookReportListViewState> {
   final FetchBookReportListUseCase _fetchBookReportListUseCase;
   final CreateBookReportUseCase _createBookReportUseCase;
   final EditBookReportUseCase _editBookReportUseCase;
   final DeleteBookReportUseCase _deleteBookReportUseCase;
-
-  Future<void> init(Book model) async {
-    state = state.copyWith(bookModel: model);
-
-    final result = await _fetchBookReportListUseCase.execute(bookId: state.bookModel!.id);
-
-    switch (result) {
-      case Success<List<BookReport>>():
-        final data = result.data;
-        state = state.copyWith(bookReportList: data);
-
-        return;
-      case Error<List<BookReport>>():
-        return;
-    }
-  }
+  Book? bookModel = null;
 
   BookReportListViewModel({
     required FetchBookReportListUseCase fetchBookReportListUseCase,
     required CreateBookReportUseCase createBookReportUseCase,
     required EditBookReportUseCase editBookReportUseCase,
     required DeleteBookReportUseCase deleteBookReportUseCase,
-  })  : _fetchBookReportListUseCase = fetchBookReportListUseCase,
+  })
+      : _fetchBookReportListUseCase = fetchBookReportListUseCase,
         _createBookReportUseCase = createBookReportUseCase,
         _editBookReportUseCase = editBookReportUseCase,
         _deleteBookReportUseCase = deleteBookReportUseCase,
@@ -47,9 +32,9 @@ class BookReportListViewModel extends StateNotifier<BookReportListViewState> {
     required void Function() onComplete,
     required void Function(String message) onError,
   }) async {
-    if (state.bookModel == null) return onError(AppError.fetch.message);
+    if (bookModel == null) return onError(AppError.fetch.message);
 
-    final result = await _fetchBookReportListUseCase.execute(bookId: state.bookModel!.id);
+    final result = await _fetchBookReportListUseCase.execute(bookId: bookModel!.id);
 
     switch (result) {
       case Success<List<BookReport>>():
@@ -71,9 +56,13 @@ class BookReportListViewModel extends StateNotifier<BookReportListViewState> {
     required void Function() onComplete,
     required void Function(String message) onError,
   }) async {
-    if (state.bookModel == null) return onError(AppError.create.message);
+    if (bookModel == null) return onError(AppError.create.message);
 
-    final result = await _createBookReportUseCase.execute(bookId: Uuid().v1(), title: title, content: content);
+    final result = await _createBookReportUseCase.execute(
+      bookId: bookModel!.id,
+      title: title,
+      content: content,
+    );
 
     switch (result) {
       case Success<void>():
@@ -86,14 +75,16 @@ class BookReportListViewModel extends StateNotifier<BookReportListViewState> {
   }
 
   Future<void> editBookReport({
-    required String bookId,
     required BookReport bookReport,
     required void Function() onComplete,
     required void Function(String message) onError,
   }) async {
-    if (state.bookModel == null) return onError(AppError.edit.message);
+    if (bookModel == null) return onError(AppError.edit.message);
 
-    final result = await _editBookReportUseCase.execute(bookId: bookId, bookReport: bookReport);
+    final result = await _editBookReportUseCase.execute(
+      bookId: bookModel!.id,
+      bookReport: bookReport,
+    );
 
     switch (result) {
       case Success<void>():
@@ -106,18 +97,25 @@ class BookReportListViewModel extends StateNotifier<BookReportListViewState> {
   }
 
   Future<void> deleteBookReport({
-    required String bookId,
     required BookReport bookReport,
-    required void Function() onComplete,
     required void Function(String message) onError,
   }) async {
-    if (state.bookModel == null) return onError(AppError.delete.message);
+    if (bookModel == null) return onError(AppError.delete.message);
 
-    final result = await _editBookReportUseCase.execute(bookId: bookId, bookReport: bookReport);
+    final result = await _deleteBookReportUseCase.execute(
+      bookId: bookModel!.id,
+      bookReport: bookReport,
+    );
 
     switch (result) {
       case Success<void>():
-        onComplete();
+        // onComplete();
+        final deletedBookReportList = state.bookReportList
+            .where((element) => element.id != bookReport.id)
+            .toList()
+            ..sort((a, b) => a.dateTime.compareTo(b.dateTime));
+
+        state = state.copyWith(bookReportList: deletedBookReportList);
         return;
       case Error<void>():
         onError(result.e);
