@@ -13,7 +13,6 @@ class ReportList extends ConsumerWidget {
     final viewModel = ref.read(bookReportListViewModelProvider.notifier);
     final state = ref.watch(bookReportListViewModelProvider);
     final reportList = state.bookReportList;
-    print(viewModel.bookModel?.title);
 
     return ListView.builder(
       itemCount: reportList.length,
