@@ -10,7 +10,7 @@ class LocalNotification {
 
   static LocalNotification get instance => _localNotification;
 
-  static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  static FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   // for FCM
   static String channelID = 'notification_channel';
@@ -39,14 +39,14 @@ class LocalNotification {
     //   importance: Importance.max,
     // );
 
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
     // await flutterLocalNotificationsPlugin
     //     .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
     //     ?.createNotificationChannel(androidNotificationChannel);
   }
 
   static void requestPermission() {
-    flutterLocalNotificationsPlugin
+    _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
         ?.requestPermissions(
           alert: true,
@@ -67,7 +67,7 @@ class LocalNotification {
         final scheduledDate = sunday.add(Duration(days: index));
 
         workList.add(
-          LocalNotification.flutterLocalNotificationsPlugin.zonedSchedule(
+          LocalNotification._flutterLocalNotificationsPlugin.zonedSchedule(
             index,
             'BookReport',
             'Time to read book',
@@ -102,5 +102,9 @@ class LocalNotification {
     }
 
     return scheduledDate;
+  }
+
+  Future<void> clearAlert() async {
+    await LocalNotification._flutterLocalNotificationsPlugin.cancelAll();
   }
 }
