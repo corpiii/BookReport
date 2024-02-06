@@ -7,8 +7,29 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
 
   HomeViewModel({
     required randomAdviceUseCase,
+    String? notificationComment,
+    bool? sundayTap,
+    bool? mondayTap,
+    bool? tuesdayTap,
+    bool? wednesdayTap,
+    bool? thursdayTap,
+    bool? fridayTap,
+    bool? saturdayTap,
+    int? alertHour,
+    int? alertMinutes,
   })  : _randomAdviceUseCase = randomAdviceUseCase,
-        super(HomeViewState()) {
+        super(HomeViewState(
+          notificationComment: notificationComment ?? 'Empty Alert',
+          sundayTap: sundayTap ?? false,
+          mondayTap: mondayTap ?? false,
+          tuesdayTap: tuesdayTap ?? false,
+          wednesdayTap: wednesdayTap ?? false,
+          thursdayTap: thursdayTap ?? false,
+          fridayTap: fridayTap ?? false,
+          saturdayTap: saturdayTap ?? false,
+          alertHour: alertHour ?? 0,
+          alertMinutes: alertMinutes ?? 0,
+        )) {
     fetchRandomAdvice();
   }
 
