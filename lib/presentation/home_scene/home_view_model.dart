@@ -54,7 +54,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
 
 extension LocalNotifiable on HomeViewModel {
   Future<void> _setAlert() async {
-    // noti cancel
+    await LocalNotification.instance.clearAlert();
 
     final dateList = [
       state.sundayTap,
