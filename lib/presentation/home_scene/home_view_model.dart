@@ -53,6 +53,27 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
 }
 
 extension LocalNotifiable on HomeViewModel {
+  Future<void> switchDayActive(Day day) async {
+    switch (day) {
+      case Day.sunday:
+        state = state.copyWith(sundayTap: !state.sundayTap);
+      case Day.monday:
+        state = state.copyWith(mondayTap: !state.mondayTap);
+      case Day.tuesday:
+        state = state.copyWith(tuesdayTap: !state.tuesdayTap);
+      case Day.wednesday:
+        state = state.copyWith(wednesdayTap: !state.wednesdayTap);
+      case Day.thursday:
+        state = state.copyWith(thursdayTap: !state.thursdayTap);
+      case Day.friday:
+        state = state.copyWith(fridayTap: !state.fridayTap);
+      case Day.saturday:
+        state = state.copyWith(saturdayTap: !state.saturdayTap);
+    }
+
+    await _setAlert();
+  }
+
   Future<void> _setAlert() async {
     await LocalNotification.instance.clearAlert();
 
@@ -83,26 +104,5 @@ extension LocalNotifiable on HomeViewModel {
       alertHour: 0,
       alertMinutes: 0,
     );
-  }
-
-  Future<void> switchDayActive(Day day) async {
-    switch (day) {
-      case Day.sunday:
-        state = state.copyWith(sundayTap: !state.sundayTap);
-      case Day.monday:
-        state = state.copyWith(mondayTap: !state.mondayTap);
-      case Day.tuesday:
-        state = state.copyWith(tuesdayTap: !state.tuesdayTap);
-      case Day.wednesday:
-        state = state.copyWith(wednesdayTap: !state.wednesdayTap);
-      case Day.thursday:
-        state = state.copyWith(thursdayTap: !state.thursdayTap);
-      case Day.friday:
-        state = state.copyWith(fridayTap: !state.fridayTap);
-      case Day.saturday:
-        state = state.copyWith(saturdayTap: !state.saturdayTap);
-    }
-
-    await _setAlert();
   }
 }

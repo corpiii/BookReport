@@ -40,24 +40,27 @@ class NotificationSettingView extends ConsumerWidget {
           actions: [
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: AppBarButton('Clear', onTap: () async {
-                await viewModel.clearAlert();
-              },),
+              child: AppBarButton(
+                'Clear',
+                onTap: () async {
+                  await viewModel.clearAlert();
+                },
+              ),
             ),
           ],
         ),
         body: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              DaysOfWeekView(dayList: dayList,),
-              SizedBox(
-                height: 30,
+              DaysOfWeekView(dayList: dayList),
+              const SizedBox(height: 30),
+              TimePickerView(
+                hour: state.alertHour,
+                minutes: state.alertMinutes,
               ),
-              TimePickerView(),
             ],
           ),
-        )
-    );
+        ));
   }
 }
