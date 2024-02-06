@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 
 class NotificationInfo extends StatelessWidget {
   final void Function() _onTap;
+  final String _comment;
 
   const NotificationInfo({
     super.key,
+    required String comment,
     required void Function() onTap,
-  }) : _onTap = onTap;
+  })  : _onTap = onTap,
+        _comment = comment;
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +18,12 @@ class NotificationInfo extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.blue,
+          color: Colors.white,
         ),
         width: MediaQuery.of(context).size.width,
         height: 120,
         child: Center(
-          child: Text(''),
+          child: Text(_comment),
         ),
       ),
     );

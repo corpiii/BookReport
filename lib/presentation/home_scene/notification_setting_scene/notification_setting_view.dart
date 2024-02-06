@@ -1,3 +1,4 @@
+import 'package:book_report/di/view_model_provider.dart';
 import 'package:book_report/presentation/common/app_bar_button.dart';
 import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:book_report/presentation/home_scene/notification_setting_scene/widgets/days_of_week_view.dart';
@@ -5,13 +6,26 @@ import 'package:book_report/presentation/home_scene/notification_setting_scene/w
 import 'package:book_report/presentation/home_scene/notification_setting_scene/widgets/time_picker_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class NotificationSettingView extends StatelessWidget {
+class NotificationSettingView extends ConsumerWidget {
   const NotificationSettingView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.read(homeViewProvider.notifier);
+    final state = ref.watch(homeViewProvider);
+    final dayList = [
+      state.sundayTap,
+      state.mondayTap,
+      state.tuesdayTap,
+      state.wednesdayTap,
+      state.thursdayTap,
+      state.fridayTap,
+      state.saturdayTap,
+    ];
+
     return Scaffold(
         backgroundColor: ColorConstant.backgroundColor,
         appBar: AppBar(
@@ -25,24 +39,30 @@ class NotificationSettingView extends StatelessWidget {
           actions: [
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: AppBarButton('Save', onTap: () {
-                context.pop();
-              },),
+              child: AppBarButton(
+                'Clear',
+                onTap: () async {
+                  await viewModel.clearAlert();
+                  if (viewModel.clearDelegate != null) {
+                    viewModel.clearDelegate!();
+                  }
+                },
+              ),
             ),
           ],
         ),
         body: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              DaysOfWeekView(),
-              SizedBox(
-                height: 30,
+              DaysOfWeekView(dayList: dayList),
+              const SizedBox(height: 30),
+              TimePickerView(
+                hour: state.alertHour,
+                minutes: state.alertMinutes,
               ),
-              TimePickerView(),
             ],
           ),
-        )
-    );
+        ));
   }
 }

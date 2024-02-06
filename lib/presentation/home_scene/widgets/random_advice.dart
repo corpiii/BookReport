@@ -2,17 +2,18 @@ import 'package:book_report/di/view_model_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RandomAdvice extends ConsumerWidget {
-  const RandomAdvice({super.key});
+class RandomAdvice extends StatelessWidget {
+  final String _comment;
+  final void Function() _onTap;
+
+  const RandomAdvice({super.key, required String comment, required void Function() onTap})
+      : _comment = comment,
+        _onTap = onTap;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeViewProvider);
-
+  Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        ref.read(homeViewProvider.notifier).fetchRandomAdvice();
-      },
+      onTap: _onTap,
       child: Center(
         child: Container(
           decoration: BoxDecoration(
@@ -22,7 +23,7 @@ class RandomAdvice extends ConsumerWidget {
           height: 100,
           child: Center(
             child: Text(
-              state.randomAdvice,
+              _comment,
               style: TextStyle(
                 fontFamily: 'RubikScribble-Regular',
                 fontWeight: FontWeight.w600,
