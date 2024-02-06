@@ -87,8 +87,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
     ];
 
     await LocalNotification.instance.setAlert(dateList, state.alertHour, state.alertMinutes);
-
-    // notification comment
+    _setNotificationComment(dateList, state.alertHour, state.alertMinutes);
   }
 
   Future<void> clearAlert() async {
@@ -106,5 +105,50 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
       alertHour: 0,
       alertMinutes: 0,
     );
+  }
+
+  void _setNotificationComment(List<bool> dateList, int alertHour, int alertMinutes) {
+    List<String> daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    final padMinutes = '$alertMinutes'.padLeft(2, '0');
+    String dayComment;
+    String timeComment = '$alertHour : $padMinutes';
+
+    final newDateList = [...dateList];
+    final firstItem = newDateList.removeAt(0);
+    newDateList.add(firstItem);
+
+    final List<String> result = [];
+
+    for (int i = 0; i < newDateList.length; i++) {
+      if (newDateList[i]) {
+        result.add(daysOfWeek[i]);
+      }
+    }
+
+    if (result.isEmpty) {
+      dayComment = 'Empty Alert';
+    } else if (result.length == 7) {
+      dayComment = 'Every day';
+    } else if (result.length == 1) {
+      dayComment = 'Every ${result[0]}';
+    } else if (result.length == 2) {
+      if (result[0] == 'Sat' && result[1] == 'Sun') {
+        dayComment = 'Weekends';
+      } else {
+        dayComment = '${result[0]} and ${result[1]}';
+      }
+    } else {
+      if (result.length == 5 && result[0] == daysOfWeek[0]
+          && result[1] == daysOfWeek[1] && result[2] == daysOfWeek[2]
+          && result[3] == daysOfWeek[3] && result[4] == daysOfWeek[4]) {
+        dayComment = 'Weekdays';
+      } else {
+        String resultString = result.sublist(0, result.length - 1).join(', ');
+        resultString += ' and ${result.last}';
+        dayComment = resultString;
+      }
+    }
+
+    state = state.copyWith(notificationComment: '$dayComment $timeComment');
   }
 }

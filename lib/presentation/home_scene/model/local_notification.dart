@@ -58,7 +58,6 @@ class LocalNotification {
   Future<void> setAlert(List<bool> dateList, int alertHour, int alertMinutes) async {
     final sunday = _generateStartDate(alertHour, alertMinutes);
     final List<Future<void>> workList = [];
-    print(sunday);
 
     dateList.asMap().entries.forEach((entry) {
       final index = entry.key;
