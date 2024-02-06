@@ -1,7 +1,6 @@
 import 'package:book_report/di/view_model_provider.dart';
 import 'package:book_report/presentation/common/app_bar_button.dart';
 import 'package:book_report/presentation/common/color_constant.dart';
-import 'package:book_report/presentation/home_scene/home_view_model.dart';
 import 'package:book_report/presentation/home_scene/notification_setting_scene/widgets/days_of_week_view.dart';
 import 'package:book_report/presentation/home_scene/notification_setting_scene/widgets/dismiss_button.dart';
 import 'package:book_report/presentation/home_scene/notification_setting_scene/widgets/time_picker_view.dart';
@@ -44,6 +43,9 @@ class NotificationSettingView extends ConsumerWidget {
                 'Clear',
                 onTap: () async {
                   await viewModel.clearAlert();
+                  if (viewModel.clearDelegate != null) {
+                    viewModel.clearDelegate!();
+                  }
                 },
               ),
             ),

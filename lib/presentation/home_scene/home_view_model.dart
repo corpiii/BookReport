@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeViewModel extends StateNotifier<HomeViewState> {
   RandomAdviceUseCase _randomAdviceUseCase;
-  final List<bool> _dayList;
+  void Function()? clearDelegate;
 
   HomeViewModel({
     required randomAdviceUseCase,
@@ -21,15 +21,6 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
     int? alertHour,
     int? alertMinutes,
   })  : _randomAdviceUseCase = randomAdviceUseCase,
-        _dayList = [
-          sundayTap ?? false,
-          mondayTap ?? false,
-          tuesdayTap ?? false,
-          wednesdayTap ?? false,
-          thursdayTap ?? false,
-          fridayTap ?? false,
-          saturdayTap ?? false,
-        ],
         super(HomeViewState(
           notificationComment: notificationComment ?? 'Empty Alert',
           sundayTap: sundayTap ?? false,
@@ -50,9 +41,17 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
 
     state = state.copyWith(randomAdvice: advice);
   }
-}
 
-extension LocalNotifiable on HomeViewModel {
+  Future<void> setHour(int hour) async {
+    state = state.copyWith(alertHour: hour);
+    await _setAlert();
+  }
+
+  Future<void> setMinutes(int minutes) async {
+    state = state.copyWith(alertMinutes: minutes);
+    await _setAlert();
+  }
+
   Future<void> switchDayActive(Day day) async {
     switch (day) {
       case Day.sunday:
@@ -88,10 +87,13 @@ extension LocalNotifiable on HomeViewModel {
     ];
 
     await LocalNotification.instance.setAlert(dateList, state.alertHour, state.alertMinutes);
+
+    // notification comment
   }
 
   Future<void> clearAlert() async {
     await LocalNotification.instance.clearAlert();
+
     state = const HomeViewState(
       notificationComment: 'Empty Alert',
       sundayTap: false,

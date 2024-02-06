@@ -58,6 +58,7 @@ class LocalNotification {
   Future<void> setAlert(List<bool> dateList, int alertHour, int alertMinutes) async {
     final sunday = _generateStartDate(alertHour, alertMinutes);
     final List<Future<void>> workList = [];
+    print(sunday);
 
     dateList.asMap().entries.forEach((entry) {
       final index = entry.key;
@@ -97,14 +98,13 @@ class LocalNotification {
     tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, alertHour, alertMinutes);
 
     while (scheduledDate.weekday != DateTime.sunday) {
-      scheduledDate.add(Duration(days: 1));
-      // scheduledDate.subtract(Duration(days: 1));
+      scheduledDate = scheduledDate.add(Duration(days: 1));
     }
 
     return scheduledDate;
   }
 
   Future<void> clearAlert() async {
-    await LocalNotification._flutterLocalNotificationsPlugin.cancelAll();
+    await _flutterLocalNotificationsPlugin.cancelAll();
   }
 }
