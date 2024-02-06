@@ -1,6 +1,4 @@
-import 'package:book_report/di/view_model_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NotificationInfo extends StatelessWidget {
   final void Function() _onTap;
@@ -20,7 +18,7 @@ class NotificationInfo extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.blue,
+          color: Colors.white,
         ),
         width: MediaQuery.of(context).size.width,
         height: 120,

@@ -1,4 +1,5 @@
 import 'package:book_report/di/view_model_provider.dart';
+import 'package:book_report/presentation/home_scene/model/local_notification.dart';
 import 'package:book_report/presentation/home_scene/widgets/latest_book_history/latest_book_history.dart';
 import 'package:book_report/presentation/home_scene/widgets/notification_info.dart';
 import 'package:book_report/presentation/home_scene/widgets/random_advice.dart';
@@ -35,6 +36,7 @@ class HomeView extends ConsumerWidget {
         NotificationInfo(
           comment: state.notificationComment,
           onTap: () {
+            LocalNotification.requestPermission();
             context.go(notificationSettingPath);
           },
         ),
