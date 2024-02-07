@@ -1,3 +1,4 @@
+import 'package:book_report/domain/model/book.dart';
 import 'package:book_report/domain/usecase/random_advice_use_case/interface/random_advice_use_case.dart';
 import 'package:book_report/presentation/home_scene/home_view_state.dart';
 import 'package:book_report/presentation/home_scene/model/day.dart';
@@ -166,5 +167,17 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
     }
 
     return '$dayComment $timeComment';
+  }
+
+  void addLastBook(Book item) {
+    final bookList = [...state.lastBooks];
+
+    if (bookList.length == 5) {
+      bookList.removeLast();
+    }
+
+    bookList.insert(0, item);
+
+    state = state.copyWith(lastBooks: bookList);
   }
 }

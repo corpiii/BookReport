@@ -28,7 +28,10 @@ class BookList extends ConsumerWidget {
             return BookListItem(
                 model: model,
                 onTap: () async {
+                  final homeViewModel = ProviderContainer().read(homeViewProvider.notifier);
                   final bookReportListViewModel = ProviderContainer().read(bookReportListViewModelProvider.notifier);
+
+                  homeViewModel.addLastBook(model);
                   bookReportListViewModel.bookModel = model;
                   await bookReportListViewModel.fetchBookReportList(onComplete: () {}, onError: (_) {});
                   context.push(bookReportListPath, extra: model);
