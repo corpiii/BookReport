@@ -1,3 +1,4 @@
+import 'package:book_report/domain/model/book.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -8,7 +9,6 @@ class HomeViewState with _$HomeViewState {
   const factory HomeViewState({
     @Default('') String randomAdvice,
     required String notificationComment,
-
     required bool sundayTap,
     required bool mondayTap,
     required bool tuesdayTap,
@@ -18,5 +18,6 @@ class HomeViewState with _$HomeViewState {
     required bool saturdayTap,
     required int alertHour,
     required int alertMinutes,
+    @Default([]) List<Book> lastBooks,
   }) = _HomeViewState;
 }

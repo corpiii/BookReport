@@ -27,7 +27,6 @@ class MainViewModel extends StateNotifier<MainViewState> {
 
   Future<void> logout({required void Function() completion}) async {
     await _logoutUseCase.execute();
-    print('logout success in main view Model');
     completion();
   }
 

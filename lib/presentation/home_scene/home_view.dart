@@ -29,7 +29,7 @@ class HomeView extends ConsumerWidget {
         const SizedBox(height: 20),
         const SessionTitle('Last books'),
         const SizedBox(height: 10),
-        LatestBookHistory(),
+        LatestBookHistory(lastBooks: state.lastBooks),
         const SizedBox(height: 50),
         const SessionTitle('Read Notification'),
         const SizedBox(height: 10),
