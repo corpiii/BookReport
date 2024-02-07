@@ -13,7 +13,7 @@ class BooksView extends StatelessWidget {
       children: [
         const Column(
           children: [
-            LatestBookHistory(),
+            // LatestBookHistory(),
             SizedBox(height: 20),
             Expanded(
               child: BookList(),

@@ -126,7 +126,8 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
     }
 
     if (result.isEmpty) {
-      dayComment = 'Empty Alert';
+      state = state.copyWith(notificationComment: 'Empty Alert');
+      return;
     } else if (result.length == 7) {
       dayComment = 'Every day';
     } else if (result.length == 1) {
