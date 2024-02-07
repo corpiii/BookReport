@@ -1,3 +1,4 @@
+import 'package:book_report/di/view_model_provider.dart';
 import 'package:book_report/domain/model/result.dart';
 import 'package:book_report/domain/usecase/delete_account_use_case/interface/delete_account_use_case.dart';
 import 'package:book_report/domain/usecase/logout_use_case/interface/logout_use_case.dart';
@@ -32,6 +33,9 @@ class MainViewModel extends StateNotifier<MainViewState> {
 
   Future<Result<void>> deleteAccount({required void Function() onComplete}) async {
     final result = await _deleteAccountUseCase.execute();
+
+    ProviderContainer().read(homeViewProvider.notifier).deleteAccount();
+    ProviderContainer().read(booksViewModelProvider.notifier).deleteAccount();
     onComplete();
 
     return result;

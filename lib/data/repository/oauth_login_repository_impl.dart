@@ -3,6 +3,7 @@ import 'package:book_report/domain/model/common_error.dart';
 import 'package:book_report/domain/model/oauth_method.dart';
 import 'package:book_report/domain/model/result.dart';
 import 'package:book_report/domain/repository/oauth_login_repository.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
@@ -55,7 +56,9 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
   Future<Result<void>> deleteAccount() async {
     if (_firebaseAuth.currentUser == null) return Result.error(OAuthError.notDeletedAccount.message);
 
-    // + 모든 책, 독후감 정보도 삭제
+    _allDeleteBook(_firebaseAuth.currentUser!.uid);
+    _allDeleteBookReport(_firebaseAuth.currentUser!.uid);
+
     try {
       await _firebaseAuth.currentUser!.delete();
 
@@ -63,5 +66,21 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
     } catch (error) {
       return Result.error(OAuthError.notDeletedAccount.message);
     }
+  }
+
+  Future<void> _allDeleteBook(String uid) async {
+    final bookCollection = FirebaseFirestore.instance.collection('book');
+
+    final willRemovedBookByID = await bookCollection.where('author', isEqualTo: uid).get();
+    Future.wait(willRemovedBookByID.docs.map((e) {
+      final bookID = e.id;
+      return bookCollection.doc(bookID).delete();
+    }));
+  }
+
+  Future<void> _allDeleteBookReport(String uid) async {
+    final bookReportCollection = FirebaseFirestore.instance.collection('bookReport');
+
+    await bookReportCollection.doc(uid).delete();
   }
 }
