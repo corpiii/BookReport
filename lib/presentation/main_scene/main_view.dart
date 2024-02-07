@@ -34,12 +34,12 @@ class MainView extends ConsumerWidget {
             viewModel.logout(completion: () {
               print('complete logout?');
               context.go(loginPath);
-              print('??');
             });
           },
           onDeleteAccount: () {
             _showDialog(context, 'Delete Account', onDelete: () {
               viewModel.deleteAccount(onComplete: () {
+                print('complete delete?');
                 context.go(loginPath);
               });
             });

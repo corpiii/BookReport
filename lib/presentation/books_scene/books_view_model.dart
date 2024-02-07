@@ -75,4 +75,8 @@ class BooksViewModel extends StateNotifier<BooksViewState> {
         return Result.error(result.e);
     }
   }
+
+  void deleteAccount() {
+    state = state.copyWith(bookList: []);
+  }
 }

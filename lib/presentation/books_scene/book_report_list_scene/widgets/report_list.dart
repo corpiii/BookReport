@@ -12,17 +12,17 @@ class ReportList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.read(bookReportListViewModelProvider.notifier);
     final state = ref.watch(bookReportListViewModelProvider);
-    final reportList = state.bookReportList;
+    final reportList = [...state.bookReportList];
 
     return ListView.builder(
       itemCount: reportList.length,
       itemBuilder: (context, index) {
         return Dismissible(
-            key: Key('$index'),
+            key: UniqueKey(),
             background: Container(color: Colors.red),
             direction: DismissDirection.endToStart,
-            onDismissed: (direction) async {
-              await viewModel.deleteBookReport(
+            onDismissed: (direction) {
+              viewModel.deleteBookReport(
                 bookReport: reportList[index],
                 onError: (error) {
                   print('error');

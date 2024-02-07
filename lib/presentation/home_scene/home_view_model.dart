@@ -176,8 +176,12 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
       bookList.removeLast();
     }
 
+    bookList.removeWhere((element) => element.id == item.id);
     bookList.insert(0, item);
-
     state = state.copyWith(lastBooks: bookList);
+  }
+
+  void deleteAccount() {
+    state = state.copyWith(lastBooks: []);
   }
 }
