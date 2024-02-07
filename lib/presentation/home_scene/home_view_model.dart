@@ -3,13 +3,16 @@ import 'package:book_report/presentation/home_scene/home_view_state.dart';
 import 'package:book_report/presentation/home_scene/model/day.dart';
 import 'package:book_report/presentation/home_scene/model/local_notification.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeViewModel extends StateNotifier<HomeViewState> {
   RandomAdviceUseCase _randomAdviceUseCase;
   void Function()? clearDelegate;
+  final SharedPreferences _prefs;
 
   HomeViewModel({
-    required randomAdviceUseCase,
+    required RandomAdviceUseCase randomAdviceUseCase,
+    required SharedPreferences prefs,
     String? notificationComment,
     bool? sundayTap,
     bool? mondayTap,
@@ -21,6 +24,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
     int? alertHour,
     int? alertMinutes,
   })  : _randomAdviceUseCase = randomAdviceUseCase,
+        _prefs = prefs,
         super(HomeViewState(
           notificationComment: notificationComment ?? 'Empty Alert',
           sundayTap: sundayTap ?? false,
@@ -87,7 +91,19 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
     ];
 
     await LocalNotification.instance.setAlert(dateList, state.alertHour, state.alertMinutes);
-    _setNotificationComment(dateList, state.alertHour, state.alertMinutes);
+    final comment = _setNotificationComment(dateList, state.alertHour, state.alertMinutes);
+    state = state.copyWith(notificationComment: comment);
+
+    _prefs.setBool('sundayTap', dateList[0]);
+    _prefs.setBool('mondayTap', dateList[1]);
+    _prefs.setBool('tuesdayTap', dateList[2]);
+    _prefs.setBool('wednesdayTap', dateList[3]);
+    _prefs.setBool('thursdayTap', dateList[4]);
+    _prefs.setBool('fridayTap', dateList[5]);
+    _prefs.setBool('saturdayTap', dateList[6]);
+    _prefs.setInt('alertHour', state.alertHour);
+    _prefs.setInt('alertMinutes', state.alertMinutes);
+    _prefs.setString('notificationComment', comment);
   }
 
   Future<void> clearAlert() async {
@@ -107,7 +123,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
     );
   }
 
-  void _setNotificationComment(List<bool> dateList, int alertHour, int alertMinutes) {
+  String _setNotificationComment(List<bool> dateList, int alertHour, int alertMinutes) {
     List<String> daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     final padMinutes = '$alertMinutes'.padLeft(2, '0');
     String dayComment;
@@ -126,8 +142,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
     }
 
     if (result.isEmpty) {
-      state = state.copyWith(notificationComment: 'Empty Alert');
-      return;
+      return 'Empty Alert';
     } else if (result.length == 7) {
       dayComment = 'Every day';
     } else if (result.length == 1) {
@@ -150,6 +165,6 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
       }
     }
 
-    state = state.copyWith(notificationComment: '$dayComment $timeComment');
+    return '$dayComment $timeComment';
   }
 }

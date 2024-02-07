@@ -24,6 +24,7 @@ import 'package:book_report/presentation/main_scene/main_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final _getIt = GetIt.instance;
 
@@ -85,12 +86,38 @@ Future<void> _useCaseRegister() async {
 }
 
 Future<void> _viewModelRegister() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final dayList = [
+    prefs.getBool('sundayTap'),
+    prefs.getBool('mondayTap'),
+    prefs.getBool('tuesdayTap'),
+    prefs.getBool('wednesdayTap'),
+    prefs.getBool('thursdayTap'),
+    prefs.getBool('fridayTap'),
+    prefs.getBool('saturdayTap')
+  ];
+  final alertHour = prefs.getInt('alertHour');
+  final alertMinutes = prefs.getInt('alertMinutes');
+  final notificationComment = prefs.getString('notificationComment');
+
   _getIt.registerSingleton(LoginViewModel(oAuthLoginUseCase: _getIt.get<OAuthLoginUseCaseImpl>()));
   _getIt.registerSingleton(MainViewModel(
     logoutUseCase: _getIt.get<LogoutUseCaseImpl>(),
     deleteAccountUseCase: _getIt.get<DeleteAccountUseCaseImpl>(),
   ));
-  _getIt.registerSingleton(HomeViewModel(randomAdviceUseCase: _getIt.get<RandomAdviceUseCaseImpl>()));
+  _getIt.registerSingleton(HomeViewModel(
+      randomAdviceUseCase: _getIt.get<RandomAdviceUseCaseImpl>(),
+      prefs: prefs,
+      notificationComment: notificationComment,
+      sundayTap: dayList[0],
+      mondayTap: dayList[1],
+      tuesdayTap: dayList[2],
+      wednesdayTap: dayList[3],
+      thursdayTap: dayList[4],
+      fridayTap: dayList[5],
+      saturdayTap: dayList[6],
+      alertHour: alertHour,
+      alertMinutes: alertMinutes));
   _getIt.registerSingleton(BooksViewModel(
     createBookUseCase: _getIt.get<CreateBookUseCaseImpl>(),
     deleteBookUseCase: _getIt.get<DeleteBookUseCaseImpl>(),
