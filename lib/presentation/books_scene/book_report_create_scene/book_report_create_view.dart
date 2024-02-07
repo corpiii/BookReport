@@ -28,60 +28,67 @@ class _BookReportCreateViewState extends State<BookReportCreateView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorConstant.backgroundColor,
-      appBar: AppBar(
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: AppBarButton(
-              'Done',
-              color: Colors.green,
-              onTap: () {
-                final viewModel = ProviderContainer().read(bookReportListViewModelProvider.notifier);
-
-                viewModel.createBookReport(
-                  title: _titleTextEditingController.text,
-                  content: _bodyTextEditingController.text,
-                  onComplete: () async {
-                    await viewModel.fetchBookReportList(onComplete: () {}, onError: (_) {});
-                    context.pop();
-                  },
-                  onError: (error) {},
-                );
-              },
-            ),
-          )
-        ],
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
         backgroundColor: ColorConstant.backgroundColor,
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              RoundedTextField(
-                controller: _titleTextEditingController,
-                hintText: 'title',
+        appBar: AppBar(
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: AppBarButton(
+                'Done',
                 color: Colors.green,
-                borderRadius: 12,
-                maxLines: 1,
+                onTap: () {
+                  final viewModel = ProviderContainer().read(bookReportListViewModelProvider.notifier);
+
+                  viewModel.createBookReport(
+                    title: _titleTextEditingController.text,
+                    content: _bodyTextEditingController.text,
+                    onComplete: () async {
+                      await viewModel.fetchBookReportList(onComplete: () {}, onError: (_) {});
+                      context.pop();
+                    },
+                    onError: (error) {},
+                  );
+                },
               ),
-              const SizedBox(height: 20),
-              RoundedTextField(
-                controller: _bodyTextEditingController,
-                hintText: 'body',
-                color: Colors.green,
-                maxLines: 15,
-                borderRadius: 12,
+            )
+          ],
+          backgroundColor: ColorConstant.backgroundColor,
+        ),
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  RoundedTextField(
+                    controller: _titleTextEditingController,
+                    hintText: 'title',
+                    color: Colors.green,
+                    borderRadius: 12,
+                    maxLines: 1,
+                  ),
+                  const SizedBox(height: 20),
+                  RoundedTextField(
+                    controller: _bodyTextEditingController,
+                    hintText: 'body',
+                    color: Colors.green,
+                    maxLines: 15,
+                    borderRadius: 12,
+                  ),
+                  SizedBox(
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.1,
+                  )
+                ],
               ),
-              SizedBox(
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height * 0.1,
-              )
-            ],
+            ),
           ),
         ),
       ),
