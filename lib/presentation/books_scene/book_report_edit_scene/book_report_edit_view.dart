@@ -64,7 +64,8 @@ class _BookReportEditViewState extends State<BookReportEditView> {
                     onComplete: () async {
                       await viewModel.fetchBookReportList(
                           onComplete: () {
-                            context.go(reportDetailPath, extra: editedModel);
+                            context.pop();
+                            context.replace(reportDetailPath, extra: editedModel);
                           },
                           onError: (_) {});
                     },
