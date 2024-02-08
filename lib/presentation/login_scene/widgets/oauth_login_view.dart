@@ -46,7 +46,7 @@ class OAuthLoginView extends ConsumerWidget {
             ),
             const SizedBox(width: 30),
             _loginIcon(
-              'assets/image/logo.png',
+              'assets/image/kakao_sign_icon.png',
               onTap: () {},
             ),
           ],

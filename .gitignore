@@ -19,7 +19,6 @@ migrate_working_dir/
 # Flutter
 *.freezed.dart
 *.g.dart
-assets/
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
@@ -51,4 +50,4 @@ lib/firebase_options.dart
 ios/firebase_app_id_file.json
 android/app/google-services.json
 key.jks
-apple_sign_in_key/AuthKey_63XJT39R56.p8
+apple_sign_in_key/
