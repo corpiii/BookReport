@@ -111,7 +111,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
   Future<void> clearAlert() async {
     await LocalNotification.instance.clearAlert();
 
-    state = const HomeViewState(
+    state = state.copyWith(
       notificationComment: 'Empty Alert',
       sundayTap: false,
       mondayTap: false,
@@ -122,6 +122,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
       saturdayTap: false,
       alertHour: 0,
       alertMinutes: 0,
+      lastBooks: [null, null, null, null, null],
     );
   }
 
@@ -187,6 +188,6 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
   }
 
   void deleteAccount() {
-    state = state.copyWith(lastBooks: []);
+    state = state.copyWith(lastBooks: [null, null, null, null, null]);
   }
 }

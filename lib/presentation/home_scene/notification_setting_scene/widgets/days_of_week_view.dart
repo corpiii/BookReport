@@ -1,4 +1,5 @@
 import 'package:book_report/di/view_model_provider.dart';
+import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:book_report/presentation/home_scene/home_view_model.dart';
 import 'package:book_report/presentation/home_scene/model/day.dart';
 import 'package:book_report/presentation/home_scene/notification_setting_scene/widgets/day_of_week_item.dart';
@@ -21,7 +22,7 @@ class DaysOfWeekView extends StatelessWidget {
       width: double.infinity,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: ColorConstant.tileColor,
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: Padding(
@@ -36,14 +37,14 @@ class DaysOfWeekView extends StatelessWidget {
                   viewModel.switchDayActive(Day.sunday);
                 },
               ),
-              Container(width: double.infinity, color: Colors.grey, height: 0.5),
+              Container(width: double.infinity, color: Colors.white, height: 0.5),
               DayOfWeekItem(
                   text: 'Every Monday',
                   isActive: _dayList[1],
                   onTap: () {
                     viewModel.switchDayActive(Day.monday);
                   }),
-              Container(width: double.infinity, color: Colors.grey, height: 0.5),
+              Container(width: double.infinity, color: Colors.white, height: 0.5),
               DayOfWeekItem(
                 text: 'Every Tuesday',
                 isActive: _dayList[2],
@@ -51,7 +52,7 @@ class DaysOfWeekView extends StatelessWidget {
                   viewModel.switchDayActive(Day.tuesday);
                 },
               ),
-              Container(width: double.infinity, color: Colors.grey, height: 0.5),
+              Container(width: double.infinity, color: Colors.white, height: 0.5),
               DayOfWeekItem(
                 text: 'Every Wednesday',
                 isActive: _dayList[3],
@@ -59,7 +60,7 @@ class DaysOfWeekView extends StatelessWidget {
                   viewModel.switchDayActive(Day.wednesday);
                 },
               ),
-              Container(width: double.infinity, color: Colors.grey, height: 0.5),
+              Container(width: double.infinity, color: Colors.white, height: 0.5),
               DayOfWeekItem(
                 text: 'Every Thursday',
                 isActive: _dayList[4],
@@ -67,7 +68,7 @@ class DaysOfWeekView extends StatelessWidget {
                   viewModel.switchDayActive(Day.thursday);
                 },
               ),
-              Container(width: double.infinity, color: Colors.grey, height: 0.5),
+              Container(width: double.infinity, color: Colors.white, height: 0.5),
               DayOfWeekItem(
                 text: 'Every Friday',
                 isActive: _dayList[5],
@@ -75,7 +76,7 @@ class DaysOfWeekView extends StatelessWidget {
                   viewModel.switchDayActive(Day.friday);
                 },
               ),
-              Container(width: double.infinity, color: Colors.grey, height: 0.5),
+              Container(width: double.infinity, color: Colors.white, height: 0.5),
               DayOfWeekItem(
                 text: 'Every Saturday',
                 isActive: _dayList[6],
