@@ -28,25 +28,26 @@ class BookReportDetailView extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
             RadiusBoxText(
               _model.title,
               radius: 12.0,
-              color: ColorConstant.tileColor,
+              color: ColorConstant.deepTileColor,
               height: 60,
+              isCenterLeft: true,
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Expanded(
               child: RadiusBoxText(
                 _model.content,
                 radius: 12.0,
-                color: ColorConstant.tileColor,
+                color: ColorConstant.deepTileColor,
                 height: 60,
               ),
             ),
-            SizedBox(height: 60,)
+            const SizedBox(height: 60,)
           ],
         ),
       ),
