@@ -44,7 +44,7 @@ class BooksViewModel extends StateNotifier<BooksViewState> {
       case Success<List<Book>>():
         final dataList = result.data;
 
-        dataList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
+        dataList.sort((a, b) => b.timestamp.compareTo(a.timestamp));
         state = state.copyWith(bookList: dataList);
 
         return const Result.success(());

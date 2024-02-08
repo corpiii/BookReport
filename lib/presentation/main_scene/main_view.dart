@@ -51,10 +51,10 @@ class MainView extends ConsumerWidget {
             child: _pageList[state.selectedIndex],
           ),
         ),
-        bottomNavigationBar: _bottomAppBar(viewModel));
+        bottomNavigationBar: _bottomAppBar(viewModel, state.selectedIndex));
   }
 
-  BottomAppBar _bottomAppBar(MainViewModel viewModel) {
+  BottomAppBar _bottomAppBar(MainViewModel viewModel, int selectedIndex) {
     const spacerRatio = 1;
 
     return BottomAppBar(
@@ -68,16 +68,19 @@ class MainView extends ConsumerWidget {
             BottomTabItem(
                 icon: Icons.home,
                 title: 'home',
+                color: selectedIndex != 0 ? Colors.black : Colors.green,
                 onTap: () {
                   viewModel.transitionPage(Pages.home);
                 }),
             const Spacer(flex: spacerRatio * 2),
             BottomTabItem(
-                icon: Icons.book,
-                title: 'book',
-                onTap: () {
-                  viewModel.transitionPage(Pages.book);
-                }),
+              icon: Icons.book,
+              title: 'book',
+              color: selectedIndex != 1 ? Colors.black : Colors.green,
+              onTap: () {
+                viewModel.transitionPage(Pages.book);
+              },
+            ),
             const Spacer(flex: spacerRatio),
           ],
         ),
@@ -97,7 +100,7 @@ class MainView extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: onDelete,
-            child: Text(
+            child: const Text(
               'Delete',
               style: TextStyle(
                 color: Colors.red,
@@ -108,7 +111,7 @@ class MainView extends ConsumerWidget {
             onPressed: () {
               context.pop();
             },
-            child: Text(
+            child: const Text(
               'Cancel',
               style: TextStyle(
                 color: Colors.blue,

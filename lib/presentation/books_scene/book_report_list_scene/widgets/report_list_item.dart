@@ -1,5 +1,6 @@
 import 'package:book_report/domain/model/book_report.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ReportListItem extends StatelessWidget {
   final void Function() _onTap;
@@ -20,12 +21,30 @@ class ReportListItem extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.green,
+            color: Colors.green[500],
             borderRadius: BorderRadius.circular(12),
           ),
           width: double.infinity,
           height: 80,
-          child: Text(_model.title),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Text(
+                  _model.title,
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Text(DateFormat('yyyy-MM-dd').format(_model.dateTime)),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
