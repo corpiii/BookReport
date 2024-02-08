@@ -60,6 +60,7 @@ class MainView extends ConsumerWidget {
     return BottomAppBar(
       height: 65,
       surfaceTintColor: Colors.white,
+      color: ColorConstant.backgroundColor,
       child: Center(
         child: Row(
           mainAxisSize: MainAxisSize.max,
@@ -68,15 +69,15 @@ class MainView extends ConsumerWidget {
             BottomTabItem(
                 icon: Icons.home,
                 title: 'home',
-                color: selectedIndex != 0 ? Colors.black : Colors.green,
+                color: selectedIndex != 0 ? Colors.black : ColorConstant.deepTileColor,
                 onTap: () {
                   viewModel.transitionPage(Pages.home);
                 }),
             const Spacer(flex: spacerRatio * 2),
             BottomTabItem(
               icon: Icons.book,
-              title: 'book',
-              color: selectedIndex != 1 ? Colors.black : Colors.green,
+              title: 'books',
+              color: selectedIndex != 1 ? Colors.black : ColorConstant.deepTileColor,
               onTap: () {
                 viewModel.transitionPage(Pages.book);
               },

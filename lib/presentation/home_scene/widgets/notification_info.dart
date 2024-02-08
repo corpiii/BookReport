@@ -1,3 +1,4 @@
+import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:flutter/material.dart';
 
 class NotificationInfo extends StatelessWidget {
@@ -18,7 +19,7 @@ class NotificationInfo extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
+          color: ColorConstant.greyColor,
         ),
         width: MediaQuery.of(context).size.width,
         height: 120,

@@ -25,7 +25,13 @@ class RadiusBoxText extends StatelessWidget {
       ),
       width: double.infinity,
       height: _height,
-      child: Text(text),
+      child: Align(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(text),
+        ),
+        alignment: Alignment.centerLeft,
+      ),
     );
   }
 }

@@ -37,6 +37,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
           saturdayTap: saturdayTap ?? false,
           alertHour: alertHour ?? 0,
           alertMinutes: alertMinutes ?? 0,
+          lastBooks: [null, null, null, null, null],
         )) {
     fetchRandomAdvice();
   }
@@ -170,15 +171,19 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
   }
 
   void addLastBook(Book item) {
-    final bookList = [...state.lastBooks];
+    final List<Book?> bookList = [...state.lastBooks];
 
     if (bookList.length == 5) {
       bookList.removeLast();
     }
 
-    bookList.removeWhere((element) => element.id == item.id);
+    bookList.removeWhere((element) => element?.id == item.id);
     bookList.insert(0, item);
     state = state.copyWith(lastBooks: bookList);
+
+    while (bookList.length < 5) {
+      bookList.add(null);
+    }
   }
 
   void deleteAccount() {

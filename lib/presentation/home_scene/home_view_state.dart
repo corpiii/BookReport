@@ -18,6 +18,6 @@ class HomeViewState with _$HomeViewState {
     required bool saturdayTap,
     required int alertHour,
     required int alertMinutes,
-    @Default([]) List<Book> lastBooks,
+    @Default([null, null, null, null, null]) List<Book?> lastBooks,
   }) = _HomeViewState;
 }

@@ -1,4 +1,5 @@
 import 'package:book_report/di/view_model_provider.dart';
+import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,16 +19,19 @@ class RandomAdvice extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
+            color: ColorConstant.tileColor,
           ),
-          width: MediaQuery.of(context).size.width * 0.85,
-          height: 100,
-          child: Center(
-            child: Text(
-              _comment,
-              style: TextStyle(
-                fontFamily: 'RubikScribble-Regular',
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
+          height: 145,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Text(
+                _comment,
+                style: TextStyle(
+                  fontFamily: 'RubikScribble-Regular',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
               ),
             ),
           ),

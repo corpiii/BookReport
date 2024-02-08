@@ -34,7 +34,7 @@ class BookReportDetailView extends StatelessWidget {
             RadiusBoxText(
               _model.title,
               radius: 12.0,
-              color: Colors.blue,
+              color: ColorConstant.tileColor,
               height: 60,
             ),
             SizedBox(height: 20,),
@@ -42,7 +42,7 @@ class BookReportDetailView extends StatelessWidget {
               child: RadiusBoxText(
                 _model.content,
                 radius: 12.0,
-                color: Colors.blue,
+                color: ColorConstant.tileColor,
                 height: 60,
               ),
             ),
