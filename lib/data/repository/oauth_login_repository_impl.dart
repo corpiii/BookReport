@@ -1,5 +1,6 @@
 import 'package:book_report/data/model/login_service/apple_login_service.dart';
 import 'package:book_report/data/model/login_service/google_login_service.dart';
+import 'package:book_report/data/model/login_service/kakao_login_service.dart';
 import 'package:book_report/domain/model/common_error.dart';
 import 'package:book_report/domain/model/oauth_method.dart';
 import 'package:book_report/domain/model/result.dart';
@@ -12,6 +13,7 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
 
   final GoogleLoginService _googleLoginService = GoogleLoginService();
   final AppleLoginService _appleLoginService = AppleLoginService();
+  final KakaoLoginService _kakaoLoginService = KakaoLoginService();
 
   OAuthLoginRepositoryImpl({
     required FirebaseAuth firebaseAuth,
@@ -27,7 +29,7 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
       case OAuthMethod.google:
         result = await _googleLoginService.login();
       case OAuthMethod.kakao:
-      // TODO: Handle this case.
+        result = await _kakaoLoginService.login();
       case OAuthMethod.anonymous:
         _firebaseAuth.signInAnonymously();
         return const Result.success(true);
@@ -35,7 +37,7 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
         return Result.error(OAuthError.notSupported.message);
     }
 
-    if (result is Error<OAuthCredential>) {
+    if (result is Error<void>) {
       return Result.error(result.e);
     }
 
@@ -43,7 +45,11 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
   }
 
   @override
-  Future<void> logout() async {
+  Future<void> logout({bool isKakao = false}) async {
+    if (isKakao) {
+      await _kakaoLoginService.logout();
+    }
+
     try {
       await _firebaseAuth.signOut();
     } catch (error) {

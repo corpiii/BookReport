@@ -39,9 +39,8 @@ class OAuthLoginView extends ConsumerWidget {
               },
             ),
             const SizedBox(width: 30),
-
-            Platform.isIOS ?
-            _loginIcon(
+            Platform.isIOS
+                ? _loginIcon(
                     'assets/image/apple_sign_icon.png',
                     onTap: () {
                       viewModel.login(
@@ -54,13 +53,22 @@ class OAuthLoginView extends ConsumerWidget {
                         },
                       );
                     },
-                  ) : Container(),
-            Platform.isIOS ?
-            const SizedBox(width: 30) : Container(),
-
+                  )
+                : Container(),
+            Platform.isIOS ? const SizedBox(width: 30) : Container(),
             _loginIcon(
               'assets/image/kakao_sign_icon.png',
-              onTap: () {},
+              onTap: () {
+                viewModel.login(
+                  method: OAuthMethod.kakao,
+                  onComplete: () {
+                    context.go(mainPath);
+                  },
+                  onError: (message) {
+                    print(message);
+                  },
+                );
+              },
             ),
           ],
         )

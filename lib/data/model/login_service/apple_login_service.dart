@@ -8,18 +8,23 @@ class AppleLoginService implements LoginService {
   @override
   Future<Result<void>> login() async {
     final firebaseAuth = FirebaseAuth.instance;
-    final userInfo = await SignInWithApple.getAppleIDCredential(scopes: [
-      AppleIDAuthorizationScopes.email,
-      AppleIDAuthorizationScopes.fullName,
-    ]);
 
-    final OAuthCredential credential = OAuthProvider('apple.com').credential(
-      idToken: userInfo.identityToken,
-      accessToken: userInfo.authorizationCode,
-    );
+    try {
+      final userInfo = await SignInWithApple.getAppleIDCredential(scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ]);
 
-    await firebaseAuth.signInWithCredential(credential);
-    
-    return Result.success(());
+      final OAuthCredential credential = OAuthProvider('apple.com').credential(
+        idToken: userInfo.identityToken,
+        accessToken: userInfo.authorizationCode,
+      );
+
+      await firebaseAuth.signInWithCredential(credential);
+    } catch (_) {
+      Result.error(OAuthError.login.message);
+    }
+
+    return const Result.success(());
   }
 }

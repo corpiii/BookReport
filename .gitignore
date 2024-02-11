@@ -51,3 +51,5 @@ ios/firebase_app_id_file.json
 android/app/google-services.json
 key.jks
 apple_sign_in_key/
+.env
+ios/Runner/Info.plist
