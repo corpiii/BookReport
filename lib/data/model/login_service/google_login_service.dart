@@ -7,7 +7,7 @@ import '../../../domain/model/common_error.dart';
 
 class GoogleLoginService implements LoginService {
   @override
-  Future<Result<OAuthCredential>> login() async {
+  Future<Result<void>> login() async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
     final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
@@ -21,6 +21,8 @@ class GoogleLoginService implements LoginService {
       idToken: authentication.idToken,
       accessToken: authentication.accessToken,
     );
+
+    await FirebaseAuth.instance.signInWithCredential(credential);
 
     return Result.success(credential);
   }

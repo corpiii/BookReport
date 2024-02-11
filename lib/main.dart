@@ -6,8 +6,10 @@ import 'package:book_report/presentation/home_scene/model/local_notification.dar
 import 'package:book_report/routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -18,6 +20,13 @@ void main() async {
   await diSetup();
   await LocalNotification.init();
   await _configureLocalTimeZone();
+  await dotenv.load(fileName: '.env');
+
+  KakaoSdk.init(
+    nativeAppKey: dotenv.env['KAKAO_APP_KEY'],
+    javaScriptAppKey: dotenv.env['KAKAO_JS_APP_KEY']
+  );
+
 
   runApp(ProviderScope(child: const MyApp()));
 }
