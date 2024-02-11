@@ -3,11 +3,11 @@ import 'package:book_report/presentation/home_scene/widgets/latest_book_history/
 import 'package:flutter/material.dart';
 
 class LatestBookHistory extends StatelessWidget {
-  final List<Book> _lastBooks;
+  final List<Book?> _lastBooks;
 
   const LatestBookHistory({
     super.key,
-    required List<Book> lastBooks,
+    required List<Book?> lastBooks,
   }) : _lastBooks = lastBooks;
 
   @override

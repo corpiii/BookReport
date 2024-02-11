@@ -1,5 +1,6 @@
 import 'package:book_report/domain/model/book.dart';
 import 'package:book_report/presentation/books_scene/book_list_scene/widgets/book_edit_delete_alert.dart';
+import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -29,7 +30,7 @@ class BookListItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
-          color: Colors.blue,
+          color: ColorConstant.tileColor,
         ),
         child: Center(
           child: Text(_model.title),

@@ -1,6 +1,4 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
-// import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class LocalNotification {
@@ -19,7 +17,7 @@ class LocalNotification {
 
   static Future<void> init() async {
     AndroidInitializationSettings androidInitializationSettings =
-        const AndroidInitializationSettings('mipmap/ic_launcher');
+    const AndroidInitializationSettings('mipmap/ic_launcher');
 
     DarwinInitializationSettings iosInitializationSettings = const DarwinInitializationSettings(
       requestAlertPermission: false,
@@ -45,21 +43,32 @@ class LocalNotification {
     //     ?.createNotificationChannel(androidNotificationChannel);
   }
 
-  static void requestPermission() {
+  static void requestPermission() async {
+    _flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestNotificationsPermission();
+
+    _flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestExactAlarmsPermission();
+
     _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
         ?.requestPermissions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
+      alert: true,
+      badge: true,
+      sound: true,
+    );
   }
 
   Future<void> setAlert(List<bool> dateList, int alertHour, int alertMinutes) async {
     final sunday = _generateStartDate(alertHour, alertMinutes);
     final List<Future<void>> workList = [];
 
-    dateList.asMap().entries.forEach((entry) {
+    dateList
+        .asMap()
+        .entries
+        .forEach((entry) {
       final index = entry.key;
       final value = entry.value;
 

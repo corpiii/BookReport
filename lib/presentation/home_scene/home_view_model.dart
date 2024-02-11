@@ -37,6 +37,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
           saturdayTap: saturdayTap ?? false,
           alertHour: alertHour ?? 0,
           alertMinutes: alertMinutes ?? 0,
+          lastBooks: [null, null, null, null, null],
         )) {
     fetchRandomAdvice();
   }
@@ -110,7 +111,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
   Future<void> clearAlert() async {
     await LocalNotification.instance.clearAlert();
 
-    state = const HomeViewState(
+    state = state.copyWith(
       notificationComment: 'Empty Alert',
       sundayTap: false,
       mondayTap: false,
@@ -121,6 +122,7 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
       saturdayTap: false,
       alertHour: 0,
       alertMinutes: 0,
+      lastBooks: [null, null, null, null, null],
     );
   }
 
@@ -170,18 +172,22 @@ class HomeViewModel extends StateNotifier<HomeViewState> {
   }
 
   void addLastBook(Book item) {
-    final bookList = [...state.lastBooks];
+    final List<Book?> bookList = [...state.lastBooks];
 
     if (bookList.length == 5) {
       bookList.removeLast();
     }
 
-    bookList.removeWhere((element) => element.id == item.id);
+    bookList.removeWhere((element) => element?.id == item.id);
     bookList.insert(0, item);
     state = state.copyWith(lastBooks: bookList);
+
+    while (bookList.length < 5) {
+      bookList.add(null);
+    }
   }
 
   void deleteAccount() {
-    state = state.copyWith(lastBooks: []);
+    state = state.copyWith(lastBooks: [null, null, null, null, null]);
   }
 }

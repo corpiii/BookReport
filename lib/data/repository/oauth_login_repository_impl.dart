@@ -49,7 +49,11 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
 
   @override
   Future<void> logout() async {
-    await _firebaseAuth.signOut();
+    try {
+      await _firebaseAuth.signOut();
+    } catch (error) {
+      print(error);
+    }
   }
 
   @override

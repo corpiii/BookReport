@@ -17,30 +17,32 @@ class HomeView extends ConsumerWidget {
     final state = ref.watch(homeViewProvider);
     final viewModel = ref.read(homeViewProvider.notifier);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        RandomAdvice(
-          comment: state.randomAdvice,
-          onTap: () {
-            viewModel.fetchRandomAdvice();
-          },
-        ),
-        const SizedBox(height: 20),
-        const SessionTitle('Last books'),
-        const SizedBox(height: 10),
-        LatestBookHistory(lastBooks: state.lastBooks),
-        const SizedBox(height: 50),
-        const SessionTitle('Read Notification'),
-        const SizedBox(height: 10),
-        NotificationInfo(
-          comment: state.notificationComment,
-          onTap: () {
-            LocalNotification.requestPermission();
-            context.go(notificationSettingPath);
-          },
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          RandomAdvice(
+            comment: state.randomAdvice,
+            onTap: () {
+              viewModel.fetchRandomAdvice();
+            },
+          ),
+          const SizedBox(height: 20),
+          const SessionTitle('Last books'),
+          const SizedBox(height: 10),
+          LatestBookHistory(lastBooks: state.lastBooks),
+          const SizedBox(height: 50),
+          const SessionTitle('Read Notification'),
+          const SizedBox(height: 10),
+          NotificationInfo(
+            comment: state.notificationComment,
+            onTap: () {
+              LocalNotification.requestPermission();
+              context.go(notificationSettingPath);
+            },
+          ),
+        ],
+      ),
     );
   }
 }

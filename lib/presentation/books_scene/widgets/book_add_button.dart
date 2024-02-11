@@ -1,3 +1,4 @@
+import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:flutter/material.dart';
 
 class BookAddButton extends StatelessWidget {
@@ -15,7 +16,12 @@ class BookAddButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(90),
-          color: Colors.deepPurple,
+          color: ColorConstant.deepTileColor,
+        ),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 30,
         ),
         width: 50,
         height: 50,

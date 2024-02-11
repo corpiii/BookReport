@@ -40,7 +40,7 @@ class _BookReportCreateViewState extends State<BookReportCreateView> {
               padding: const EdgeInsets.all(8.0),
               child: AppBarButton(
                 'Done',
-                color: Colors.green,
+                color: ColorConstant.deepTileColor,
                 onTap: () {
                   final viewModel = ProviderContainer().read(bookReportListViewModelProvider.notifier);
 
@@ -68,7 +68,7 @@ class _BookReportCreateViewState extends State<BookReportCreateView> {
                   RoundedTextField(
                     controller: _titleTextEditingController,
                     hintText: 'title',
-                    color: Colors.green,
+                    color: ColorConstant.deepTileColor,
                     borderRadius: 12,
                     maxLines: 1,
                   ),
@@ -76,7 +76,7 @@ class _BookReportCreateViewState extends State<BookReportCreateView> {
                   RoundedTextField(
                     controller: _bodyTextEditingController,
                     hintText: 'body',
-                    color: Colors.green,
+                    color: ColorConstant.deepTileColor,
                     maxLines: 15,
                     borderRadius: 12,
                   ),

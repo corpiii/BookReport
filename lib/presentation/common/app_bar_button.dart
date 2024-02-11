@@ -1,3 +1,4 @@
+import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:flutter/material.dart';
 
 class AppBarButton extends StatelessWidget {
@@ -8,7 +9,7 @@ class AppBarButton extends StatelessWidget {
   const AppBarButton(
     String text, {
     super.key,
-    Color color = Colors.blue,
+    Color color = ColorConstant.deepTileColor,
     required void Function() onTap,
   })  : _text = text,
         _color = color,

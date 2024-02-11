@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:book_report/di/di_setup.dart';
+import 'package:book_report/presentation/common/color_constant.dart';
 import 'package:book_report/presentation/home_scene/model/local_notification.dart';
 import 'package:book_report/routes.dart';
 import 'package:flutter/foundation.dart';
@@ -39,8 +40,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // splashColor: Colors.transparent,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        splashColor: Colors.transparent,
+        colorSchemeSeed: ColorConstant.tileColor,
         useMaterial3: true,
       ),
       routerConfig: routes,

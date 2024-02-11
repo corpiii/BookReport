@@ -17,8 +17,6 @@ class DayOfWeekItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapDown: (detail) {}, // color Change
-      onTapUp: (detail) {},
       onTap: _onTap,
       child: Container(
         color: Colors.transparent,
@@ -27,13 +25,22 @@ class DayOfWeekItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           child: Row(
             children: [
-              Text(_text),
+              Text(
+                _text,
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
+              ),
               const Spacer(),
-              _isActive ? const Icon(
-                Icons.check,
-                size: 30,
-                color: Colors.greenAccent,
-              ) : Container(height: 30,)
+              _isActive
+                  ? const Icon(
+                      Icons.check,
+                      size: 30,
+                      color: Colors.black,
+                    )
+                  : Container(
+                      height: 30,
+                    )
             ],
           ),
         ),

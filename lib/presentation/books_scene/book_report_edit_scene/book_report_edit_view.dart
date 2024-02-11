@@ -52,7 +52,7 @@ class _BookReportEditViewState extends State<BookReportEditView> {
               padding: const EdgeInsets.all(12.0),
               child: AppBarButton(
                 'Done',
-                color: Colors.green,
+                color: ColorConstant.deepTileColor,
                 onTap: () {
                   final editedModel = widget._model.copyWith(
                     title: _titleTextEditingController.text,
@@ -86,7 +86,7 @@ class _BookReportEditViewState extends State<BookReportEditView> {
                   hintText: 'title',
                   borderRadius: 12,
                   maxLines: 1,
-                  color: Colors.green,
+                  color: ColorConstant.deepTileColor,
                 ),
                 const SizedBox(height: 20),
                 RoundedTextField(
@@ -94,7 +94,7 @@ class _BookReportEditViewState extends State<BookReportEditView> {
                   hintText: 'content',
                   borderRadius: 12,
                   maxLines: 15,
-                  color: Colors.green,
+                  color: ColorConstant.deepTileColor,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
