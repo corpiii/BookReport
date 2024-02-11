@@ -3,6 +3,7 @@ import 'package:book_report/domain/model/oauth_method.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'dart:io';
 
 import '../../../routes.dart';
 
@@ -33,18 +34,30 @@ class OAuthLoginView extends ConsumerWidget {
                   onComplete: () {
                     context.go(mainPath);
                   },
-                  onError: (message) {
-
-                  },
+                  onError: (message) {},
                 );
               },
             ),
             const SizedBox(width: 30),
+
+            Platform.isIOS ?
             _loginIcon(
-              'assets/image/apple_sign_icon.png',
-              onTap: () {},
-            ),
-            const SizedBox(width: 30),
+                    'assets/image/apple_sign_icon.png',
+                    onTap: () {
+                      viewModel.login(
+                        method: OAuthMethod.apple,
+                        onComplete: () {
+                          context.go(mainPath);
+                        },
+                        onError: (message) {
+                          print(message);
+                        },
+                      );
+                    },
+                  ) : Container(),
+            Platform.isIOS ?
+            const SizedBox(width: 30) : Container(),
+
             _loginIcon(
               'assets/image/kakao_sign_icon.png',
               onTap: () {},

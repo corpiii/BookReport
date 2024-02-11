@@ -1,3 +1,4 @@
+import 'package:book_report/data/model/login_service/apple_login_service.dart';
 import 'package:book_report/data/model/login_service/google_login_service.dart';
 import 'package:book_report/domain/model/common_error.dart';
 import 'package:book_report/domain/model/oauth_method.dart';
@@ -10,6 +11,7 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
   final FirebaseAuth _firebaseAuth;
 
   final GoogleLoginService _googleLoginService = GoogleLoginService();
+  final AppleLoginService _appleLoginService = AppleLoginService();
 
   OAuthLoginRepositoryImpl({
     required FirebaseAuth firebaseAuth,
@@ -17,18 +19,18 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
 
   @override
   Future<Result<bool>> login(OAuthMethod method) async {
-    final Result<OAuthCredential> result;
+    final Result<void> result;
 
     switch (method) {
       case OAuthMethod.apple:
-      // TODO: Handle this case.
+        result = await _appleLoginService.login();
       case OAuthMethod.google:
         result = await _googleLoginService.login();
       case OAuthMethod.kakao:
       // TODO: Handle this case.
       case OAuthMethod.anonymous:
         _firebaseAuth.signInAnonymously();
-        return Result.success(true);
+        return const Result.success(true);
       default:
         return Result.error(OAuthError.notSupported.message);
     }
@@ -37,14 +39,7 @@ class OAuthLoginRepositoryImpl implements OAuthLoginRepository {
       return Result.error(result.e);
     }
 
-    final credential = (result as Success<OAuthCredential>).data;
-    await _firebaseAuth.signInWithCredential(credential);
-
-    if (_firebaseAuth.currentUser == null) {
-      return Result.error(OAuthError.login.message);
-    }
-
-    return Result.success(true);
+    return const Result.success(true);
   }
 
   @override
