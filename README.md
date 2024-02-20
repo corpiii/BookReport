@@ -1,16 +1,33 @@
-# book_report
+# BookReport 소개
+꾸준한 독서 습관을 기르기 위해 알림을 설정하고 하루에 읽은만큼만 독후감을 작성합니다.
 
-A new Flutter project.
+## 프로젝트 영상
+- 구글 로그인
+- 책 생성
+- 독후감 
+  - 독후감 생성
+  - 독후감 수정
+  - 독후감 삭제
+- 알림 설정
+- 알림 해제
+- 로그아웃
 
-## Getting Started
+위의 순서로 진행됩니다.
 
-This project is a starting point for a Flutter application.
+<img width=30% src='https://github.com/corpiii/BookReport/assets/82566116/9ada29bc-9bdf-4631-b42d-df7b017523c4'/>
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 개발 기능
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+
+## 배운 것
+
+
+
+
+
+
+
+
